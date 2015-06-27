@@ -536,17 +536,6 @@ function! s:coffee_filetype_settings()
 endfunction
 
 " functions
-function! s:Move_Middle()
-  let pos = getpos('.')
-  let line_str = getline(pos[1])
-  let middle = strchars(line_str) / 2
-  let pos[2] = middle
-  call remove(pos, 0)
-  call cursor(pos)
-endfunction
-command! -nargs=0 MoveMiddle call s:Move_Middle()
-nnoremap <Space>m :MoveMiddle<CR>
-
 " 地名から緯度経度を取得-> :messageに残るように, clipboardにも入れる
 function! s:getLonLat(address)
   let url = 'http://maps.googleapis.com/maps/api/geocode'
@@ -603,141 +592,8 @@ call unite#define_source(s:source)
 unlet s:source
 " }}}
 
-"-----------------------------------------------------------
-" Color Inc De crement {{{
-"-----------------------------------------------------------
-function! s:Color_Fluctuation(type, ...)
-  " 第2引数がなければ ''
-  let color = get(a:, 1, '')
-
-  " カーソル下の<cfile>を取得
-  let colorcode = expand('<cfile>')
-  " カーソル位置
-  let pos = getpos(".")
-
-  " check
-  if !s:Check_ColorCode(colorcode)
-    echo colorcode. ' is not color code.'
-    return 0
-  endif
-
-  " colorcodeの分離
-  let red   = str2nr(colorcode[1:2], 16)
-  let green = str2nr(colorcode[3:4], 16)
-  let blue  = str2nr(colorcode[5:6], 16)
-  let c_dict = {'red': red, 'green': green, 'blue': blue}
-
-  if a:type
-    " increment
-    let new_dict = s:Color_Increment(color, c_dict)
-  else
-    " decrement
-    let new_dict = s:Color_Decrement(color, c_dict)
-  endif
-
-  let new_color = s:Get_ColorCode(new_dict)
-
-  "replace
-  execute 's/'.colorcode.'/'.new_color.'/g'
-  call setpos('.', pos)
-endfunction
-
-" ColorCord Increment
-function! s:Color_Increment(color, c_dict)
-  let max = 255
-  let min = 0
-  for key in keys(a:c_dict)
-    if a:color != ''
-      if a:color == key && s:Check_Range(a:c_dict[key], max, min)
-        let a:c_dict[key] = a:c_dict[key] + 1
-      endif
-    else
-      if s:Check_Range(a:c_dict[key], max, min)
-        let a:c_dict[key] = a:c_dict[key] + 1
-      endif
-    endif
-  endfor
-
-  return a:c_dict
-endfunction
-
-" ColorCord Decremet
-function! s:Color_Decrement(color, c_dict)
-  let max = 256
-  let min = 1
-  for key in keys(a:c_dict)
-    if a:color != ''
-      if a:color == key && s:Check_Range(a:c_dict[key], max, min)
-        let a:c_dict[key] = a:c_dict[key] - 1
-      endif
-    else
-      if s:Check_Range(a:c_dict[key], max, min)
-        let a:c_dict[key] = a:c_dict[key] - 1
-      endif
-    endif
-  endfor
-
-  return a:c_dict
-endfunction
-
-" #RRGGBBの形かチェック
-function! s:Check_ColorCode(code)
-  if a:code =~ '^\#\{1}\x\{6}$'
-    return 1
-  else
-    return 0
-  endif
-endfunction
-
-" 範囲内かチェック
-function! s:Check_Range(color, max, min)
-  if a:min <= a:color && a:color < a:max
-    return 1
-  else
-    return 0
-  endif
-endfunction
-
-function! s:Get_ColorCode(new_dict)
-  let s:V = vital#of('vital')
-  let s:M = s:V.import('Data.String')
-  let code = '#'
-  let show = 'Red:'. a:new_dict.red. ' Green:'. a:new_dict.green. ' Blue:'. a:new_dict.blue
-
-  for key in keys(a:new_dict)
-    " 10 -> 16
-    let val = s:M.nr2hex(a:new_dict[key])
-
-    if strlen(val) == 1
-      let val = '0'.val
-    elseif  strlen(val) == 0
-      let val = '00'
-    endif
-    let a:new_dict[key] = val
-  endfor
-
-  " echo
-  echo show
-
-  " create new color code.
-  let code = code. a:new_dict.red. a:new_dict.green. a:new_dict.blue
-  return code
-endfunction
-
 " インクリメント、デクリメント
 nnoremap + <C-A>
 nnoremap - <C-X>
-"command! -nargs=* ColorIncrement call s:Color_Fluctuation(<f-args>)
-"nnoremap <C-A> :ColorIncrement 1<CR>
-"nnoremap <left> :ColorIncrement 1 red<CR>
-"nnoremap <Up> :ColorIncrement 1 green<CR>
-"nnoremap <Right> :ColorIncrement 1 blue<CR>
-"
-"command! -nargs=* ColorDecrement call s:Color_Fluctuation(<f-args>)
-"nnoremap <C-X> :ColorDecrement 0<CR>
-"nnoremap <S-Left> :ColorDecrement 0 red<CR>
-"nnoremap <S-Down> :ColorDecrement 0 green<CR>
-"nnoremap <S-Right> :ColorDecrement 0 blue<CR>
-" }}}
 
 " vim: set foldmethod=marker:
