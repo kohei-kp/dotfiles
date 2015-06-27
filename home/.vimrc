@@ -134,6 +134,7 @@ endif
 " }}}
 
 NeoBundle 'xsbeats/vim-blade'
+NeoBundle 'kanchoku/tcvime'
 
 call neobundle#end()
 
@@ -202,6 +203,10 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-k> <C-w>k
 nnoremap <C-j> <C-w>j
 
+" 横分割と縦分割(新バッファ)
+nnoremap <silent>,vn :vnew<CR>
+nnoremap <silent>,en :enew<CR>
+
 " 移動
 nnoremap j gj
 nnoremap k gk
@@ -237,7 +242,6 @@ nnoremap <ESC><ESC> :nohlsearch<CR>
 " PHP用?
 inoremap <C-d> $
 inoremap <C-d><C-d> $this->
-
 "}}}
 
 "現在開いているディレクトリをルートディレクトリにする
@@ -484,6 +488,45 @@ map / <Plug>(incsearch-forward)
 map ? <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-stay)
 
+if has('keymap')
+  set iminsert=0 imsearch=0
+  " 切替時にインデントが解除されるのを回避するため、1<C-H>
+  inoremap <C-J> 1<C-H><C-O>:call <SID>EnableKeymap('tcode')<CR>
+  inoremap <silent> <C-L> 1<C-H><C-O>:call <SID>DisableKeymap()<CR>
+  inoremap <silent> <ESC> <ESC>:set imsearch=0<CR>
+  nnoremap <silent> <C-K>k <Plug>TcvimeNKatakana
+  vnoremap <silent> <C-K>k <Plug>TcvimeVKatakana
+endif
+
+function! s:EnableKeymap(keymapname)
+  call tcvime#SetKeymap(a:keymapname)
+  " <Space>で前置型交ぜ書き変換を開始するか、読みが無ければ' 'を挿入。
+  " (lmapにすると、lmap有効時にfやtやrの後の<Space>が使用不可。(<C-R>=なので))
+  inoremap <silent> <Space> <Plug>TcvimeIConvOrSpace
+endfunction
+
+function! s:DisableKeymap()
+  let &iminsert = 0
+  silent! iunmap <Space>
+  TcvimeCloseHelp
+endfunction
+
+" lmapのカスタマイズを行う関数。
+" tcvime#SetKeymap()からコールバックされる。
+function! TcvimeCustomKeymap()
+  " tc2同様の後置型交ぜ書き変換を行うための設定:
+  " 活用しない語
+  lmap <silent> 18 <C-R>=tcvime#InputPostConvert(1, 0)<CR>
+  lmap <silent> 28 <C-R>=tcvime#InputPostConvert(2, 0)<CR>
+  lmap <silent> 38 <C-R>=tcvime#InputPostConvert(3, 0)<CR>
+  lmap <silent> 48 <C-R>=tcvime#InputPostConvert(4, 0)<CR>
+  " 活用する語(ただしtc2と違って、読みの文字数には活用語尾は含まない)
+  lmap <silent> 29 <C-R>=tcvime#InputPostConvert(2, 1)<CR>
+  lmap <silent> 39 <C-R>=tcvime#InputPostConvert(3, 1)<CR>
+  lmap <silent> 49 <C-R>=tcvime#InputPostConvert(4, 1)<CR>
+  lmap <silent> 59 <C-R>=tcvime#InputPostConvert(5, 1)<CR>
+endfunction
+
 " augroup {{{
 augroup myGroup
   autocmd FileType javascript call s:javascript_filetype_settings()
@@ -570,6 +613,14 @@ function! s:getLonLat(address)
 endfunction
 command! -nargs=1 GetLonLat :call s:getLonLat(<f-args>)
 nnoremap ,ll :GetLonLat 
+
+" vnewしたあと、指定ファイルタイプに変更
+function! s:setFileTypeForNewBuf(file_type)
+  vnew
+  execut 'set filetype='. a:file_type
+endfunction
+command! -nargs=1 SetFileTypeForNewBuf :call s:setFileTypeForNewBuf(<f-args>)
+nnoremap ,sf :SetFileTypeForNewBuf
 
 " unite source sample {{{
 let s:source = {
