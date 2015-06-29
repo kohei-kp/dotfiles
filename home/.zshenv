@@ -4,11 +4,13 @@ export LANG=ja_JP.UTF-8
 export LC_ALL=$LANG
 export LANGUAGE=$LANG
 export TZ=JST-9
+export GOPATH=~/go
 
 path=( # システム用
     /usr/local/opt/coreutils/libexec/gnubin(N-/)
     /usr/local/bin(N-/)
     /bin(N-/)
+    $GOPATH/bin(N-/)
     # 自分用
     /$HOME/bin(N-/)
     /$HOME/python(N-/)
