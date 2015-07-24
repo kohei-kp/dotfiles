@@ -11,6 +11,7 @@ path=( # システム用
     /usr/local/bin(N-/)
     /bin(N-/)
     $GOPATH/bin(N-/)
+    /usr/local/Cellar/httpd/2.2.27/sbin(N-/)
     # 自分用
     /$HOME/bin(N-/)
     /$HOME/python(N-/)

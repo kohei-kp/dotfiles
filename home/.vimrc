@@ -131,10 +131,14 @@ if neobundle#tap('jazzradio.vim')
         \   }
         \ })
 endif
-" }}}
 
 NeoBundle 'xsbeats/vim-blade'
-NeoBundle 'kanchoku/tcvime'
+"NeoBundle 'kanchoku/tcvime'
+
+NeoBundle 'smarty-syntax'
+
+" }}}
+
 
 call neobundle#end()
 
@@ -238,6 +242,9 @@ nnoremap <F6> :source $MYGIVIMRC<CR>
 
 " 検索結果のハイライトをEsc連打でクリアする
 nnoremap <ESC><ESC> :nohlsearch<CR>
+
+" コピー系
+nnoremap <silent>,p "0p
 
 " PHP用?
 inoremap <C-d> $
@@ -488,44 +495,49 @@ map / <Plug>(incsearch-forward)
 map ? <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-stay)
 
-if has('keymap')
-  set iminsert=0 imsearch=0
-  " 切替時にインデントが解除されるのを回避するため、1<C-H>
-  inoremap <C-J> 1<C-H><C-O>:call <SID>EnableKeymap('tcode')<CR>
-  inoremap <silent> <C-L> 1<C-H><C-O>:call <SID>DisableKeymap()<CR>
-  inoremap <silent> <ESC> <ESC>:set imsearch=0<CR>
-  nnoremap <silent> <C-K>k <Plug>TcvimeNKatakana
-  vnoremap <silent> <C-K>k <Plug>TcvimeVKatakana
-endif
+" TagList
+let Tlist_Show_One_File = 1 " 現在のバッファのファイルのみを表示する
+let Tlist_Exit_OnlyWindow = 1
+let tlist_php_settings = 'php;c:class;f:function'
 
-function! s:EnableKeymap(keymapname)
-  call tcvime#SetKeymap(a:keymapname)
-  " <Space>で前置型交ぜ書き変換を開始するか、読みが無ければ' 'を挿入。
-  " (lmapにすると、lmap有効時にfやtやrの後の<Space>が使用不可。(<C-R>=なので))
-  inoremap <silent> <Space> <Plug>TcvimeIConvOrSpace
-endfunction
-
-function! s:DisableKeymap()
-  let &iminsert = 0
-  silent! iunmap <Space>
-  TcvimeCloseHelp
-endfunction
-
-" lmapのカスタマイズを行う関数。
-" tcvime#SetKeymap()からコールバックされる。
-function! TcvimeCustomKeymap()
-  " tc2同様の後置型交ぜ書き変換を行うための設定:
-  " 活用しない語
-  lmap <silent> 18 <C-R>=tcvime#InputPostConvert(1, 0)<CR>
-  lmap <silent> 28 <C-R>=tcvime#InputPostConvert(2, 0)<CR>
-  lmap <silent> 38 <C-R>=tcvime#InputPostConvert(3, 0)<CR>
-  lmap <silent> 48 <C-R>=tcvime#InputPostConvert(4, 0)<CR>
-  " 活用する語(ただしtc2と違って、読みの文字数には活用語尾は含まない)
-  lmap <silent> 29 <C-R>=tcvime#InputPostConvert(2, 1)<CR>
-  lmap <silent> 39 <C-R>=tcvime#InputPostConvert(3, 1)<CR>
-  lmap <silent> 49 <C-R>=tcvime#InputPostConvert(4, 1)<CR>
-  lmap <silent> 59 <C-R>=tcvime#InputPostConvert(5, 1)<CR>
-endfunction
+"if has('keymap')
+"  set iminsert=0 imsearch=0
+"  " 切替時にインデントが解除されるのを回避するため、1<C-H>
+"  inoremap <C-J> 1<C-H><C-O>:call <SID>EnableKeymap('tcode')<CR>
+"  inoremap <silent> <C-L> 1<C-H><C-O>:call <SID>DisableKeymap()<CR>
+"  inoremap <silent> <ESC> <ESC>:set imsearch=0<CR>
+"  nnoremap <silent> <C-K>k <Plug>TcvimeNKatakana
+"  vnoremap <silent> <C-K>k <Plug>TcvimeVKatakana
+"endif
+"
+"function! s:EnableKeymap(keymapname)
+"  call tcvime#SetKeymap(a:keymapname)
+"  " <Space>で前置型交ぜ書き変換を開始するか、読みが無ければ' 'を挿入。
+"  " (lmapにすると、lmap有効時にfやtやrの後の<Space>が使用不可。(<C-R>=なので))
+"  inoremap <silent> <Space> <Plug>TcvimeIConvOrSpace
+"endfunction
+"
+"function! s:DisableKeymap()
+"  let &iminsert = 0
+"  silent! iunmap <Space>:
+"  TcvimeCloseHelp
+"endfunction
+"
+"" lmapのカスタマイズを行う関数。
+"" tcvime#SetKeymap()からコールバックされる。
+"function! TcvimeCustomKeymap()
+"  " tc2同様の後置型交ぜ書き変換を行うための設定:
+"  " 活用しない語
+"  lmap <silent> 18 <C-R>=tcvime#InputPostConvert(1, 0)<CR>
+"  lmap <silent> 28 <C-R>=tcvime#InputPostConvert(2, 0)<CR>
+"  lmap <silent> 38 <C-R>=tcvime#InputPostConvert(3, 0)<CR>
+"  lmap <silent> 48 <C-R>=tcvime#InputPostConvert(4, 0)<CR>
+"  " 活用する語(ただしtc2と違って、読みの文字数には活用語尾は含まない)
+"  lmap <silent> 29 <C-R>=tcvime#InputPostConvert(2, 1)<CR>
+"  lmap <silent> 39 <C-R>=tcvime#InputPostConvert(3, 1)<CR>
+"  lmap <silent> 49 <C-R>=tcvime#InputPostConvert(4, 1)<CR>
+"  lmap <silent> 59 <C-R>=tcvime#InputPostConvert(5, 1)<CR>
+"endfunction
 
 " augroup {{{
 augroup myGroup
@@ -541,6 +553,7 @@ augroup myGroup
   autocmd BufRead,BufNewFile,BufReadPre *.coffee set filetype=coffee
   autocmd FileType coffee call s:coffee_filetype_settings()
   autocmd BufRead,BufNewFile,BufReadpre *.blade.php set filetype=blade
+  autocmd InsertLeave * set nopaste
 augroup END
 "}}}
 function! s:javascript_filetype_settings()
@@ -553,6 +566,7 @@ function! s:html_filetype_settings()
   setlocal tabstop=2
   setlocal shiftwidth=2
   setlocal includeexpr=substitute(v:fname,'^\\/','','') |
+  "set filetype=smarty
 endfunction
 
 " css
