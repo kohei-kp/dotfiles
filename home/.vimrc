@@ -620,7 +620,7 @@ function! s:setFileTypeForNewBuf(file_type)
   execut 'set filetype='. a:file_type
 endfunction
 command! -nargs=1 SetFileTypeForNewBuf :call s:setFileTypeForNewBuf(<f-args>)
-nnoremap ,sf :SetFileTypeForNewBuf
+nnoremap ,sf :SetFileTypeForNewBuf 
 
 " unite source sample {{{
 let s:source = {
