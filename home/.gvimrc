@@ -25,3 +25,21 @@ set tabstop=4
 set guifont=Ricty:h14
 
 hi LineNr ctermbg=black guifg=#778899
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
