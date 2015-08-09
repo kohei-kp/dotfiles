@@ -483,10 +483,13 @@ omap g/ <Plug>(easymotion-tn)
 "operator-replace
 map _ <Plug>(operator-replace)
 
+
 " incsearch
 map / <Plug>(incsearch-forward)
 map ? <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-stay)
+
+nnoremap <Leader>/ /
 
 if has('keymap')
   set iminsert=0 imsearch=0
