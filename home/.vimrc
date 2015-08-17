@@ -137,10 +137,13 @@ NeoBundle 'xsbeats/vim-blade'
 
 "NeoBundle 'smarty-syntax'
 
+NeoBundle 'kana/vim-filetype-haskell'
+NeoBundle 'eagletmt/ghcmod-vim'
+NeoBundle 'ujihisa/neco-ghc'
+NeoBundle 'ujihisa/ref-hoogle'
+NeoBundle 'ujihisa/unite-haskellimport'
+NeoBundle 'osyo-manga/vim-watchdogs'
 " }}}
-
-NeoBundle 'xsbeats/vim-blade'
-NeoBundle 'kanchoku/tcvime'
 
 call neobundle#end()
 
