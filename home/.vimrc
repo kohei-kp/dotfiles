@@ -19,133 +19,104 @@ if has('vim_starting') && has('reltime')
   augroup END
 endif
 
+if &compatible
+  set nocompatible               " Be iMproved
+endif
+
 "neobundle
 if has('vim_starting')
-  set runtimepath+=~/.vim/bundle/neobundle.vim/
+  "set runtimepath+=~/.vim/bundle/neobundle.vim/
+  set runtimepath+=~/.vim/dein/repos/github.com/Shougo/dein.vim
   set runtimepath+=~/vim//bundle/vital.vim/
 endif
 
-call neobundle#begin(expand('~/.vim/bundle'))
+call dein#begin(expand('.vim/dein'))
 
-filetype plugin indent on
+" dein {{{
+" Let dein manage dein
+call dein#add('Shougo/dein.vim')
+call dein#add('Shougo/neosnippet.vim')
+call dein#add('Shougo/neosnippet-snippets')
+call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
+call dein#add('Shougo/unite.vim')
+call dein#add('Shougo/neocomplete.vim')
+call dein#add('Shougo/vimfiler.vim')
+call dein#add('Shougo/junkfile.vim')
+call dein#add('Shougo/neomru.vim')
+call dein#add('Shougo/neosnippet.vim')
+call dein#add('Shougo/neosnippet-snippets')
+call dein#add('Shougo/vimproc.vim', { 'build': 'make' })
 
-" Installation check:
-if neobundle#exists_not_installed_bundles()
-  echomsg 'Not installed bundles : '.
-  \ string(neobundle#get_not_installed_bundle_names())
-  echomsg 'Please execute ":NeoBundleInstall" command.'
-endif
+call dein#add('thinca/vim-quickrun')
+call dein#add('thinca/vim-ref')
 
-" Plugins {{{
-NeoBundleFetch 'Shougo/neobundle.vim'
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'Shougo/neocomplete.vim'
-NeoBundle 'Shougo/junkfile.vim'
-NeoBundle 'Shougo/neomru.vim'
-NeoBundle 'Shougo/neosnippet.vim'
-NeoBundle 'Shougo/neosnippet-snippets'
-NeoBundle 'Shougo/vimproc', {
-    \ 'build' : {
-        \ 'windows' : 'make -f make_mingw32.mak',
-        \ 'cygwin'  : 'make -f make_cygwin.mak',
-        \ 'mac'     : 'make -f make_mac.mak',
-        \ 'unix'    : 'make -f make_unix.mak'
-    \ },
-\ }
-NeoBundle 'Shougo/vimshell.vim'
-NeoBundle 'Shougo/vimfiler.vim'
+call dein#add('kana/vim-textobj-user')
+call dein#add('kana/vim-textobj-entire')
+call dein#add('kana/vim-textobj-indent')
+call dein#add('kana/vim-textobj-function')
+call dein#add('kana/vim-textobj-line')
+call dein#add('kana/vim-textobj-datetime')
+call dein#add('kana/vim-operator-replace')
+call dein#add('kana/vim-operator-user')
+call dein#add('kana/vim-operator-replace')
 
-NeoBundle 'thinca/vim-quickrun'
-NeoBundle 'thinca/vim-ref'
+call dein#add('osyo-manga/vim-anzu')
+call dein#add('osyo-manga/vim-textobj-blockwise')
+call dein#add('osyo-manga/vim-operator-blockwise')
 
-NeoBundle 'kana/vim-textobj-user'
-NeoBundle 'kana/vim-textobj-entire'
-NeoBundle 'kana/vim-textobj-indent'
-NeoBundle 'kana/vim-textobj-function'
-NeoBundle 'kana/vim-textobj-line'
-NeoBundle 'kana/vim-textobj-datetime'
-NeoBundle 'kana/vim-operator-replace'
-NeoBundle 'kana/vim-operator-user'
-NeoBundle 'kana/vim-operator-replace'
+call dein#add('itchyny/lightline.vim')
+call dein#add('itchyny/calendar.vim')
 
-NeoBundle 'osyo-manga/vim-anzu'
-NeoBundle 'osyo-manga/vim-textobj-blockwise'
-NeoBundle 'osyo-manga/vim-operator-blockwise'
+call dein#add('mattn/webapi-vim')
+call dein#add('mattn/emmet-vim')
 
-NeoBundle 'itchyny/lightline.vim'
-NeoBundle 'itchyny/calendar.vim'
+call dein#add('tpope/vim-surround')
+call dein#add('tpope/vim-markdown')
+call dein#add('vim-jp/vital.vim')
+call dein#add('L9')
+call dein#add('rbtnn/puyo.vim')
+call dein#add('rhysd/clever-f.vim')
+call dein#add('vim-scripts/sudo.vim')
+call dein#add('Yggdroot/indentLine')
+call dein#add('davidhalter/jedi-vim')
+call dein#add('kannokanno/previm')
+call dein#add('tyru/open-browser.vim')
+call dein#add('jelera/vim-javascript-syntax')
+call dein#add('othree/javascript-libraries-syntax.vim')
+call dein#add('jQuery')
+call dein#add('ujihisa/unite-colorscheme')
+call dein#add('w0ng/vim-hybrid')
+call dein#add('Simple-Javascript-Indenter')
+call dein#add('elzr/vim-json')
+call dein#add('lilydjwg/colorizer')
+call dein#add('akiyan/vim-textobj-php')
+call dein#add('taglist.vim')
+call dein#add('cocopon/lightline-hybrid.vim')
+call dein#add('Lokaltog/vim-easymotion')
+call dein#add('kchmck/vim-coffee-script')
 
-NeoBundle 'basyura/TweetVim'
-NeoBundle 'basyura/twibill.vim'
+call dein#add('haya14busa/incsearch.vim')
 
-NeoBundle 'mattn/emoji-vim'
-NeoBundle 'mattn/webapi-vim'
-NeoBundle 'mattn/emmet-vim'
+call dein#add('thinca/vim-scouter')
 
-NeoBundle 'tpope/vim-surround'
-NeoBundle 'tpope/vim-markdown'
+call dein#add('kana/vim-filetype-haskell')
+call dein#add('eagletmt/ghcmod-vim')
+call dein#add('ujihisa/neco-ghc')
+call dein#add('ujihisa/ref-hoogle')
+call dein#add('ujihisa/unite-haskellimport')
+call dein#add('osyo-manga/vim-watchdogs')
 
-NeoBundle 'vim-jp/vital.vim'
-NeoBundle 'L9'
-NeoBundle 'rbtnn/puyo.vim'
-NeoBundle 'rhysd/clever-f.vim'
-NeoBundle 'vim-scripts/sudo.vim'
-NeoBundle 'Yggdroot/indentLine'
-NeoBundle 'davidhalter/jedi-vim'
-NeoBundle 'kannokanno/previm'
-NeoBundle 'tyru/open-browser.vim'
-NeoBundle 'jelera/vim-javascript-syntax'
-NeoBundle 'othree/javascript-libraries-syntax.vim'
-NeoBundle 'jQuery'
-NeoBundle 'ujihisa/unite-colorscheme'
-NeoBundle 'w0ng/vim-hybrid'
-NeoBundle 'Simple-Javascript-Indenter'
-NeoBundle 'elzr/vim-json'
-NeoBundle 'lilydjwg/colorizer'
-NeoBundle 'akiyan/vim-textobj-php'
-NeoBundle 'taglist.vim'
-NeoBundle 'cocopon/lightline-hybrid.vim'
-NeoBundle 'Lokaltog/vim-easymotion'
-NeoBundle 'kchmck/vim-coffee-script'
-
-NeoBundle 'haya14busa/incsearch.vim'
-
-NeoBundle 'thinca/vim-scouter'
-
-NeoBundleLazy 'supermomonga/jazzradio.vim', { 'depends' : [ 'Shougo/unite.vim' ] }
-if neobundle#tap('jazzradio.vim')
-  call neobundle#config({
-        \   'autoload' : {
-        \     'unite_sources' : [
-        \       'jazzradio'
-        \     ],
-        \     'commands' : [
-        \       'jazzradioupdatechannels',
-        \       'jazzradiostop',
-        \       {
-        \         'name' : 'jazzradioplay',
-        \         'complete' : 'customlist,jazzradio#channel_id_complete'
-        \       }
-        \     ],
-        \     'function_prefix' : 'jazzradio'
-        \   }
-        \ })
-endif
-
-NeoBundle 'xsbeats/vim-blade'
-"NeoBundle 'kanchoku/tcvime'
-
-"NeoBundle 'smarty-syntax'
-
-NeoBundle 'kana/vim-filetype-haskell'
-NeoBundle 'eagletmt/ghcmod-vim'
-NeoBundle 'ujihisa/neco-ghc'
-NeoBundle 'ujihisa/ref-hoogle'
-NeoBundle 'ujihisa/unite-haskellimport'
-NeoBundle 'osyo-manga/vim-watchdogs'
 " }}}
 
-call neobundle#end()
+call dein#end()
+
+" If you want to install not installed plugins on startup.
+"if dein#check_install()
+"  call dein#install()
+"endif
+
+"End dein Scripts-------------------------
+filetype plugin indent on
 
 " option settings {{{
 syntax on
@@ -200,7 +171,9 @@ set nrformats=alpha " アルファベット<C-a><C-x>でアルファベットを
 
 set matchpairs& matchpairs+=<:> " <>をマッチパターンに加える
 
-set undodir=$HOME.'.vim/undo'
+set background=dark
+
+set noundofile
 " }}}
 
 " mappings {{{
@@ -357,7 +330,7 @@ if has('conceal')
 endif
 
 " Tell neosnippet about th other snippets
-let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets, ~/.vim/mysnippets'
+let g:neosnippet#snippets_directory='~/.vim/dein/repos/github.com/Shougo/vim-snippets/snippets, ~/.vim/mysnippets'
 
 " lightline settings
 let g:lightline = {
@@ -502,45 +475,6 @@ map ? <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-stay)
 
 nnoremap <Leader>/ /
-
-" if has('keymap')
-"   set iminsert=0 imsearch=0
-"   " 切替時にインデントが解除されるのを回避するため、1<C-H>
-"   inoremap <C-J> 1<C-H><C-O>:call <SID>EnableKeymap('tcode')<CR>
-"   inoremap <silent> <C-L> 1<C-H><C-O>:call <SID>DisableKeymap()<CR>
-"   inoremap <silent> <ESC> <ESC>:set imsearch=0<CR>
-"   nnoremap <silent> <C-K>k <Plug>TcvimeNKatakana
-"   vnoremap <silent> <C-K>k <Plug>TcvimeVKatakana
-" endif
-" 
-" function! s:EnableKeymap(keymapname)
-"   call tcvime#SetKeymap(a:keymapname)
-"   " <Space>で前置型交ぜ書き変換を開始するか、読みが無ければ' 'を挿入。
-"   " (lmapにすると、lmap有効時にfやtやrの後の<Space>が使用不可。(<C-R>=なので))
-"   inoremap <silent> <Space> <Plug>TcvimeIConvOrSpace
-" endfunction
-" 
-" function! s:DisableKeymap()
-"   let &iminsert = 0
-"   silent! iunmap <Space>
-"   TcvimeCloseHelp
-" endfunction
-" 
-" " lmapのカスタマイズを行う関数。
-" " tcvime#SetKeymap()からコールバックされる。
-" function! TcvimeCustomKeymap()
-"   " tc2同様の後置型交ぜ書き変換を行うための設定:
-"   " 活用しない語
-"   lmap <silent> 18 <C-R>=tcvime#InputPostConvert(1, 0)<CR>
-"   lmap <silent> 28 <C-R>=tcvime#InputPostConvert(2, 0)<CR>
-"   lmap <silent> 38 <C-R>=tcvime#InputPostConvert(3, 0)<CR>
-"   lmap <silent> 48 <C-R>=tcvime#InputPostConvert(4, 0)<CR>
-"   " 活用する語(ただしtc2と違って、読みの文字数には活用語尾は含まない)
-"   lmap <silent> 29 <C-R>=tcvime#InputPostConvert(2, 1)<CR>
-"   lmap <silent> 39 <C-R>=tcvime#InputPostConvert(3, 1)<CR>
-"   lmap <silent> 49 <C-R>=tcvime#InputPostConvert(4, 1)<CR>
-"   lmap <silent> 59 <C-R>=tcvime#InputPostConvert(5, 1)<CR>
-" endfunction
 
 " augroup {{{
 augroup myGroup
