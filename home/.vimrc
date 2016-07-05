@@ -25,9 +25,8 @@ endif
 
 "neobundle
 if has('vim_starting')
-  "set runtimepath+=~/.vim/bundle/neobundle.vim/
-  set runtimepath+=~/.vim/dein/repos/github.com/Shougo/dein.vim
-  set runtimepath+=~/vim//bundle/vital.vim/
+  set runtimepath^=~/.vim/dein/repos/github.com/Shougo/dein.vim/
+  set runtimepath+=~/vim/dein/repos/github.com/vim-jp/vital.vim/
 endif
 
 call dein#begin(expand('.vim/dein'))
@@ -43,8 +42,6 @@ call dein#add('Shougo/neocomplete.vim')
 call dein#add('Shougo/vimfiler.vim')
 call dein#add('Shougo/junkfile.vim')
 call dein#add('Shougo/neomru.vim')
-call dein#add('Shougo/neosnippet.vim')
-call dein#add('Shougo/neosnippet-snippets')
 call dein#add('Shougo/vimproc.vim', { 'build': 'make' })
 
 call dein#add('thinca/vim-quickrun')
@@ -58,7 +55,6 @@ call dein#add('kana/vim-textobj-line')
 call dein#add('kana/vim-textobj-datetime')
 call dein#add('kana/vim-operator-replace')
 call dein#add('kana/vim-operator-user')
-call dein#add('kana/vim-operator-replace')
 
 call dein#add('osyo-manga/vim-anzu')
 call dein#add('osyo-manga/vim-textobj-blockwise')
@@ -74,7 +70,6 @@ call dein#add('tpope/vim-surround')
 call dein#add('tpope/vim-markdown')
 call dein#add('vim-jp/vital.vim')
 call dein#add('L9')
-call dein#add('rbtnn/puyo.vim')
 call dein#add('rhysd/clever-f.vim')
 call dein#add('vim-scripts/sudo.vim')
 call dein#add('Yggdroot/indentLine')
