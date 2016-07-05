@@ -101,6 +101,8 @@ call dein#add('ujihisa/ref-hoogle')
 call dein#add('ujihisa/unite-haskellimport')
 call dein#add('osyo-manga/vim-watchdogs')
 
+call dein#add('junegunn/vim-easy-align')
+
 " }}}
 
 call dein#end()
@@ -468,6 +470,10 @@ map _ <Plug>(operator-replace)
 map / <Plug>(incsearch-forward)
 map ? <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-stay)
+
+" easy-align
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
 
 nnoremap <Leader>/ /
 
