@@ -26,7 +26,7 @@ endif
 "neobundle
 if has('vim_starting')
   set runtimepath+=~/.vim/dein/repos/github.com/Shougo/dein.vim/
-  set runtimepath+=~/vim/dein/repos/github.com/vim-jp/vital.vim/
+  set runtimepath+=~/.vim/dein/repos/github.com/vim-jp/vital.vim/
 endif
 
 call dein#begin(expand('~/.vim/dein'))
