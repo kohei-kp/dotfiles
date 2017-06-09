@@ -76,12 +76,8 @@ call dein#add('Yggdroot/indentLine')
 call dein#add('davidhalter/jedi-vim')
 call dein#add('kannokanno/previm')
 call dein#add('tyru/open-browser.vim')
-call dein#add('jelera/vim-javascript-syntax')
-call dein#add('othree/javascript-libraries-syntax.vim')
-call dein#add('jQuery')
 call dein#add('ujihisa/unite-colorscheme')
 call dein#add('w0ng/vim-hybrid')
-call dein#add('Simple-Javascript-Indenter')
 call dein#add('elzr/vim-json')
 call dein#add('lilydjwg/colorizer')
 call dein#add('akiyan/vim-textobj-php')
@@ -113,7 +109,11 @@ call dein#add('marijnh/tern_for_vim', { 'build': 'npm install' })
 
 call dein#add('othree/yajs.vim')
 call dein#add('othree/es.next.syntax.vim')
-call dein#add('MaxMellon/vim-jsx-pretty')
+"call dein#add('MaxMellon/vim-jsx-pretty')
+call dein#add('Simple-Javascript-Indenter')
+call dein#add('jelera/vim-javascript-syntax')
+call dein#add('othree/javascript-libraries-syntax.vim')
+call dein#add('jQuery')
 
 " }}}
 
@@ -297,10 +297,6 @@ augroup vim-anzu
   autocmd CursorHold,CursorHoldI,WinLeave,TabLeave * call anzu#clear_search_status() 
 augroup END
 
-" SimpleJsIndenter
-let g:SimpleJsIndenter_BriefMode = 1
-let g:SimpleJsIndenter_CaseIndentLevel = -1
-
 " Vdebug
 " start/run (to next breakpoint/end of script)
 "nnoremap <silent> ,x5 <F5>
@@ -453,7 +449,7 @@ endfunction
 
 " SimpleJsIndenter
 let g:SimpleJsIndenter_BriefMode = 1
-let g:SimpleJsIndenter_CaseIndentLevel = -1
+" let g:SimpleJsIndenter_CaseIndentLevel = -1
 
 " javascript-libraries-syntax
 let g:used_javascript_libs = 'jquery,angularjs,angularui'
