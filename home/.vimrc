@@ -76,12 +76,8 @@ call dein#add('Yggdroot/indentLine')
 call dein#add('davidhalter/jedi-vim')
 call dein#add('kannokanno/previm')
 call dein#add('tyru/open-browser.vim')
-call dein#add('jelera/vim-javascript-syntax')
-call dein#add('othree/javascript-libraries-syntax.vim')
-call dein#add('jQuery')
 call dein#add('ujihisa/unite-colorscheme')
 call dein#add('w0ng/vim-hybrid')
-call dein#add('Simple-Javascript-Indenter')
 call dein#add('elzr/vim-json')
 call dein#add('lilydjwg/colorizer')
 call dein#add('akiyan/vim-textobj-php')
@@ -102,6 +98,22 @@ call dein#add('ujihisa/unite-haskellimport')
 call dein#add('osyo-manga/vim-watchdogs')
 
 call dein#add('junegunn/vim-easy-align')
+
+call dein#add('lambdalisue/vim-gita')
+
+call dein#add('joonty/vdebug')
+
+call dein#add('posva/vim-vue')
+
+call dein#add('marijnh/tern_for_vim', { 'build': 'npm install' })
+
+call dein#add('othree/yajs.vim')
+call dein#add('othree/es.next.syntax.vim')
+"call dein#add('MaxMellon/vim-jsx-pretty')
+call dein#add('Simple-Javascript-Indenter')
+call dein#add('jelera/vim-javascript-syntax')
+call dein#add('othree/javascript-libraries-syntax.vim')
+call dein#add('jQuery')
 
 " }}}
 
@@ -204,6 +216,7 @@ vnoremap > >gv
 "Shift + Enterで改行して行頭削除(自動コメント挿入を消す)
 inoremap <S-CR> <CR><C-u>
 nnoremap <S-CR> o<C-u>
+inoremap <C-z> <CR><C-u>
 
 nnoremap <silent>,tn :tabnext<CR>
 nnoremap <silent>,tt :tabnew<CR>
@@ -211,15 +224,17 @@ nnoremap <silent>,tt :tabnew<CR>
 nnoremap <C-TAB> gt
 nnoremap <C-S-TAB> gT
 
-nnoremap <F1> :e $MYVIMRC<CR>
-nnoremap <F5> :source $MYVIMRC<CR>
-nnoremap <F6> :source $MYGIVIMRC<CR>
+"nnoremap <F1> :e $MYVIMRC<CR>
+"nnoremap <F5> :source $MYVIMRC<CR>
+"nnoremap <F6> :source $MYGIVIMRC<CR>
 
 " 検索結果のハイライトをEsc連打でクリアする
 nnoremap <ESC><ESC> :nohlsearch<CR>
 
 " コピー系
 "nnoremap <silent>,p "0p
+
+"inoremap <expr> j  getline('.')[col('.') - 2] ==# 'j' ? "\<BS>\<ESC>" : 'j'
 
 " PHP用?
 inoremap <C-d> $
@@ -282,9 +297,28 @@ augroup vim-anzu
   autocmd CursorHold,CursorHoldI,WinLeave,TabLeave * call anzu#clear_search_status() 
 augroup END
 
-" SimpleJsIndenter
-let g:SimpleJsIndenter_BriefMode = 1
-let g:SimpleJsIndenter_CaseIndentLevel = -1
+" Vdebug
+" start/run (to next breakpoint/end of script)
+"nnoremap <silent> ,x5 <F5>
+" step over
+"nnoremap <silent> ,x2 <F2>
+" step info
+"nnoremap <silent> ,x3 <F3>
+" step out
+"nnoremap <silent> ,x4 <F4>
+" stop debugging(kills script)
+"nnoremap <silent> ,x6 <F6>
+" detach script from debugger
+"nnoremap <silent> ,x7 <F7>
+" run to cursor
+"nnoremap <silent> ,x9 <F9>
+" toggle line breakpoint
+"nnoremap <silent> ,x10 <F10>
+" show context variables(e.g. after eval)
+"nnoremap <silent> ,x11 <F11>
+" evaluate variable under cursor
+"nnoremap <silent> ,x12 <F12>
+
 
 " unite
 nnoremap <silent> ,uy :<C-u>Unite history/yank<CR>
@@ -292,6 +326,22 @@ nnoremap <silent> ,ub :<C-u>Unite buffer<CR>
 nnoremap <silent> ,uf :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
 nnoremap <silent> ,ur :<C-u>Unite -buffer-name=register register<CR>
 nnoremap <silent> ,uu :<C-u>Unite file_mru buffer<CR>
+" バッファーのgrep
+nnoremap <silent> ,ug :<C-u>Unite grep:. -buffer-name=search-buffer<CR>
+" ディレクトリ下のgrep
+nnoremap <silent> ,ud :<C-u>Unite grep -buffer-name=search-buffer<CR>
+" カーソル下のgrep
+nnoremap <silent> ,uc :<C-u>Unite grep:. -buffer-name=search-buffer<CR><C-R><C-W><CR>
+" grep検索結果の再呼び出し
+nnoremap <silent> ,r :<C-u>UniteResume search-buffer<CR>
+
+" Unite grepにagを使う
+if (executable('ag'))
+  let g:unite_source_grep_command = 'ag'
+  let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
+  let g:unite_source_grep_recursive_opt = ''
+endif
+
 
 " open-browser
 nmap <Leader>w <Plug>(openbrowser-smart-search)
@@ -307,7 +357,6 @@ nnoremap <silent> ,s :VimShell<CR>
 
 " vimFiler
 nnoremap <silent> ,f :VimFiler<CR>
-
 "neosnippet
 " Plugin key-mappings.
 imap <C-k> <Plug>(neosnippet_expand_or_jump)
@@ -400,7 +449,7 @@ endfunction
 
 " SimpleJsIndenter
 let g:SimpleJsIndenter_BriefMode = 1
-let g:SimpleJsIndenter_CaseIndentLevel = -1
+" let g:SimpleJsIndenter_CaseIndentLevel = -1
 
 " javascript-libraries-syntax
 let g:used_javascript_libs = 'jquery,angularjs,angularui'
@@ -491,11 +540,14 @@ augroup myGroup
   autocmd BufRead,BufNewFile,BufReadPre *.coffee set filetype=coffee
   autocmd FileType coffee call s:coffee_filetype_settings()
   autocmd BufRead,BufNewFile,BufReadpre *.blade.php set filetype=blade
+  autocmd BufNewFile,BufRead *.volt set filetype=htmldjango
+  autocmd BufNewFile,BufRead *.tag setlocal ft=javascript
 augroup END
 " }}}
 function! s:javascript_filetype_settings()
   setlocal tabstop=2
   setlocal shiftwidth=2
+  setlocal omnifunc=tern#Complete
 endfunction
 
 " html
