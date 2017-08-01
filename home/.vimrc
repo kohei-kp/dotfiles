@@ -29,100 +29,100 @@ if has('vim_starting')
   set runtimepath+=~/.vim/dein/repos/github.com/vim-jp/vital.vim/
 endif
 
+
+" Let dein manage dein
+
+if dein#load_state('~/.vim/dein')
+
 call dein#begin(expand('~/.vim/dein'))
 
-" dein {{{
-" Let dein manage dein
-call dein#add('Shougo/dein.vim')
-call dein#add('Shougo/neosnippet.vim')
-call dein#add('Shougo/neosnippet-snippets')
-call dein#add('Shougo/vimshell')
-call dein#add('Shougo/unite.vim')
-call dein#add('Shougo/neocomplete.vim')
-call dein#add('Shougo/vimfiler.vim')
-call dein#add('Shougo/junkfile.vim')
-call dein#add('Shougo/neomru.vim')
-call dein#add('Shougo/vimproc.vim', { 'build': 'make' })
+  call dein#add('Shougo/dein.vim')
+  call dein#add('Shougo/neosnippet.vim')
+  call dein#add('Shougo/neosnippet-snippets')
+  call dein#add('Shougo/vimshell')
+  call dein#add('Shougo/unite.vim')
+  call dein#add('Shougo/neocomplete.vim')
+  call dein#add('Shougo/vimfiler.vim')
+  call dein#add('Shougo/junkfile.vim')
+  call dein#add('Shougo/neomru.vim')
+  call dein#add('Shougo/vimproc.vim', { 'build' : 'make' })
 
-call dein#add('thinca/vim-quickrun')
-call dein#add('thinca/vim-ref')
+  call dein#add('thinca/vim-quickrun')
+  call dein#add('thinca/vim-ref')
 
-call dein#add('kana/vim-textobj-user')
-call dein#add('kana/vim-textobj-entire')
-call dein#add('kana/vim-textobj-indent')
-call dein#add('kana/vim-textobj-function')
-call dein#add('kana/vim-textobj-line')
-call dein#add('kana/vim-textobj-datetime')
-call dein#add('kana/vim-operator-replace')
-call dein#add('kana/vim-operator-user')
+  call dein#add('kana/vim-textobj-user')
+  call dein#add('kana/vim-textobj-entire')
+  call dein#add('kana/vim-textobj-indent')
+  call dein#add('kana/vim-textobj-function')
+  call dein#add('kana/vim-textobj-line')
+  call dein#add('kana/vim-textobj-datetime')
+  call dein#add('kana/vim-operator-replace')
+  call dein#add('kana/vim-operator-user')
 
-call dein#add('osyo-manga/vim-anzu')
-call dein#add('osyo-manga/vim-textobj-blockwise')
-call dein#add('osyo-manga/vim-operator-blockwise')
+  call dein#add('osyo-manga/vim-anzu')
+  call dein#add('osyo-manga/vim-textobj-blockwise')
+  call dein#add('osyo-manga/vim-operator-blockwise')
 
-call dein#add('itchyny/lightline.vim')
-call dein#add('itchyny/calendar.vim')
+  call dein#add('itchyny/lightline.vim')
 
-call dein#add('mattn/webapi-vim')
-call dein#add('mattn/emmet-vim')
+  call dein#add('mattn/webapi-vim')
+  call dein#add('mattn/emmet-vim')
 
-call dein#add('tpope/vim-surround')
-call dein#add('tpope/vim-markdown')
-call dein#add('vim-jp/vital.vim')
-call dein#add('L9')
-call dein#add('rhysd/clever-f.vim')
-call dein#add('vim-scripts/sudo.vim')
-call dein#add('Yggdroot/indentLine')
-call dein#add('davidhalter/jedi-vim')
-call dein#add('kannokanno/previm')
-call dein#add('tyru/open-browser.vim')
-call dein#add('ujihisa/unite-colorscheme')
-call dein#add('w0ng/vim-hybrid')
-call dein#add('elzr/vim-json')
-call dein#add('lilydjwg/colorizer')
-call dein#add('akiyan/vim-textobj-php')
-call dein#add('taglist.vim')
-call dein#add('cocopon/lightline-hybrid.vim')
-call dein#add('Lokaltog/vim-easymotion')
-call dein#add('kchmck/vim-coffee-script')
+  call dein#add('tpope/vim-surround')
+  call dein#add('tpope/vim-markdown')
 
-call dein#add('haya14busa/incsearch.vim')
+  call dein#add('vim-jp/vital.vim')
+  call dein#add('vim-scripts/L9')
+  call dein#add('rhysd/clever-f.vim')
+  call dein#add('vim-scripts/sudo.vim')
+  call dein#add('Yggdroot/indentLine')
+  call dein#add('davidhalter/jedi-vim')
+  call dein#add('kannokanno/previm')
+  call dein#add('tyru/open-browser.vim')
+  call dein#add('ujihisa/unite-colorscheme')
+  call dein#add('w0ng/vim-hybrid')
+  call dein#add('elzr/vim-json')
+  call dein#add('lilydjwg/colorizer')
+  call dein#add('akiyan/vim-textobj-php')
+  call dein#add('vim-scripts/taglist.vim')
+  call dein#add('cocopon/lightline-hybrid.vim')
+  call dein#add('Lokaltog/vim-easymotion')
+  call dein#add('kchmck/vim-coffee-script')
+  call dein#add('haya14busa/incsearch.vim')
+  call dein#add('kana/vim-filetype-haskell')
+  call dein#add('eagletmt/ghcmod-vim')
 
-call dein#add('thinca/vim-scouter')
+  call dein#add('ujihisa/neco-ghc')
+  call dein#add('ujihisa/ref-hoogle')
+  call dein#add('ujihisa/unite-haskellimport')
 
-call dein#add('kana/vim-filetype-haskell')
-call dein#add('eagletmt/ghcmod-vim')
-call dein#add('ujihisa/neco-ghc')
-call dein#add('ujihisa/ref-hoogle')
-call dein#add('ujihisa/unite-haskellimport')
-call dein#add('osyo-manga/vim-watchdogs')
+  call dein#add('osyo-manga/vim-watchdogs')
+  call dein#add('junegunn/vim-easy-align')
+  call dein#add('lambdalisue/vim-gita')
+  call dein#add('joonty/vdebug')
+  call dein#add('posva/vim-vue')
 
-call dein#add('junegunn/vim-easy-align')
+  call dein#add('ternjs/tern_for_vim', { 'build': 'npm install' })
+  "call dein#add('othree/es.next.syntax.vim')
+  "call dein#add('MaxMellon/vim-jsx-pretty')
+  "call dein#add('othree/yajs.vim')
+  call dein#add('vim-scripts/Simple-Javascript-Indenter')
+  call dein#add('jelera/vim-javascript-syntax')
+  call dein#add('othree/javascript-libraries-syntax.vim')
+  call dein#add('vim-scripts/jQuery')
+  call dein#add('leafgarland/typescript-vim', { 'on_ft': 'typescript' })
+  call dein#add('Quramy/tsuquyomi', { 'on_ft': 'typescript' })
+  call dein#add('twitvim/twitvim')
+  call dein#add('cespare/vim-toml')
 
-call dein#add('lambdalisue/vim-gita')
-
-call dein#add('joonty/vdebug')
-
-call dein#add('posva/vim-vue')
-
-call dein#add('marijnh/tern_for_vim', { 'build': 'npm install' })
-
-call dein#add('othree/yajs.vim')
-call dein#add('othree/es.next.syntax.vim')
-"call dein#add('MaxMellon/vim-jsx-pretty')
-call dein#add('Simple-Javascript-Indenter')
-call dein#add('jelera/vim-javascript-syntax')
-call dein#add('othree/javascript-libraries-syntax.vim')
-call dein#add('jQuery')
-
-" }}}
-
-call dein#end()
+  call dein#end()
+  call dein#save_state()
+endif
 
 " If you want to install not installed plugins on startup.
-"if dein#check_install()
-"  call dein#install()
-"endif
+if dein#check_install()
+  call dein#install()
+endif
 
 "End dein Scripts-------------------------
 filetype plugin indent on
@@ -346,12 +346,6 @@ endif
 " open-browser
 nmap <Leader>w <Plug>(openbrowser-smart-search)
 
-" tweetvim
-"let g:tweetvim_display_icon = 1
-nnoremap <silent> ,tl :TweetVimHomeTimeline<CR>
-nnoremap <silent> ,ts :TweetVimSay<CR>
-nnoremap <silent> ,tu :TweetVimUserTimeline lisia__<CR>
-
 " vimshell
 nnoremap <silent> ,s :VimShell<CR>
 
@@ -526,6 +520,12 @@ nmap ga <Plug>(EasyAlign)
 
 nnoremap <Leader>/ /
 
+" twitvim
+let twitvim_browser_cmd = 'open'
+let wtitvim_force_ssl = 1
+let twitvim_count = 40
+let twitvim_enable_python = 1
+
 " augroup {{{
 augroup myGroup
   autocmd FileType javascript call s:javascript_filetype_settings()
@@ -547,7 +547,6 @@ augroup END
 function! s:javascript_filetype_settings()
   setlocal tabstop=2
   setlocal shiftwidth=2
-  setlocal omnifunc=tern#Complete
 endfunction
 
 " html
