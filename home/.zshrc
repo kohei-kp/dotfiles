@@ -83,9 +83,9 @@ export PTOOLSPATH=/Users/kohei/phalcon-tools
 #export NODE_PATH=/usr/local/lib/node_modules
 
 #vi,vimコマンド時に、$HOMEの.vimrcを読み込む
-alias vim=/Applications/MacVim.app/Contents/MacOS/Vim
+#alias vim=/Applications/MacVim.app/Contents/MacOS/Vim
 alias vi=vim
-alias vimdiff=/Applications/MacVim.app/Contents/MacOS/vimdiff
+#alias vimdiff=/Applications/MacVim.app/Contents/MacOS/vimdiff
 alias view=/Applications/MacVim.app/Contents/MacOS/view
 
 #php55
