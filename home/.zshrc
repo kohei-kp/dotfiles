@@ -86,7 +86,7 @@ export PTOOLSPATH=/Users/kohei/phalcon-tools
 #alias vim=/Applications/MacVim.app/Contents/MacOS/Vim
 alias vi=vim
 #alias vimdiff=/Applications/MacVim.app/Contents/MacOS/vimdiff
-alias view=/Applications/MacVim.app/Contents/MacOS/view
+#alias view=/Applications/MacVim.app/Contents/MacOS/view
 
 #php55
 PATH="/usr/local/bin:$PATH"
@@ -182,4 +182,7 @@ export PATH="$HOME/.rbenv/bin:$PATH"
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 export PATH="$HOME/.rbenv/shims:$PATH"
-source /Users/kohei/.phpbrew/bashrc
+export PATH=/Users/mizobata/.nodebrew/current/bin:/usr/local/opt/php55bin:/usr/local/bin:/usr/local/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/mizobata/go/bin://Users/mizobata/bin
+export PATH="/usr/local/sbin:$PATH"
+
+source $HOME/.phpbrew/bashrc

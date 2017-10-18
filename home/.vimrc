@@ -29,7 +29,6 @@ if has('vim_starting')
   set runtimepath+=~/.vim/dein/repos/github.com/vim-jp/vital.vim/
 endif
 
-
 " Let dein manage dein
 
 if dein#load_state('~/.vim/dein')
@@ -102,7 +101,7 @@ call dein#begin(expand('~/.vim/dein'))
   call dein#add('joonty/vdebug')
   call dein#add('posva/vim-vue')
 
-  call dein#add('ternjs/tern_for_vim', { 'build': 'npm install' })
+  "call dein#add('ternjs/tern_for_vim', { 'build': 'npm install' })
   "call dein#add('othree/es.next.syntax.vim')
   "call dein#add('MaxMellon/vim-jsx-pretty')
   "call dein#add('othree/yajs.vim')
@@ -296,29 +295,6 @@ augroup vim-anzu
   autocmd!
   autocmd CursorHold,CursorHoldI,WinLeave,TabLeave * call anzu#clear_search_status() 
 augroup END
-
-" Vdebug
-" start/run (to next breakpoint/end of script)
-"nnoremap <silent> ,x5 <F5>
-" step over
-"nnoremap <silent> ,x2 <F2>
-" step info
-"nnoremap <silent> ,x3 <F3>
-" step out
-"nnoremap <silent> ,x4 <F4>
-" stop debugging(kills script)
-"nnoremap <silent> ,x6 <F6>
-" detach script from debugger
-"nnoremap <silent> ,x7 <F7>
-" run to cursor
-"nnoremap <silent> ,x9 <F9>
-" toggle line breakpoint
-"nnoremap <silent> ,x10 <F10>
-" show context variables(e.g. after eval)
-"nnoremap <silent> ,x11 <F11>
-" evaluate variable under cursor
-"nnoremap <silent> ,x12 <F12>
-
 
 " unite
 nnoremap <silent> ,uy :<C-u>Unite history/yank<CR>
