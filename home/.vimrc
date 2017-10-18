@@ -169,7 +169,7 @@ set listchars=tab:▸\ ,trail:-,extends:»,precedes:«,nbsp:%
 
 "文字コードと改行コードの表示
 set statusline=%<%f\%m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%l,%c%V%8P
-
+set laststatus=2
 set showtabline=2
 
 " 音を鳴らさない
@@ -534,6 +534,7 @@ augroup myGroup
   autocmd FileType less call s:css_filetype_settings()
   autocmd FileType vim call s:vim_filetype_settings()
   autocmd FileType python call s:py_filetype_settings()
+  autocmd BufNewFile,BufRead *.vue set filetype=html
   autocmd BufRead,BufNewFile jquery.*.js set ft=javascript syntax=jquery
   autocmd BufRead,BufNewFile *.md set filetype=markdown
   autocmd BufRead,BufNewFile *.json,*jsonp,*.geojson,*.topojson set filetype=json
