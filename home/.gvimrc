@@ -13,7 +13,7 @@ set guioptions-=T
 "ツールバー表示
 "set guioptions+=T
 
-colorscheme hybrid
+colorscheme iceberg
 
 set antialias
 "set nobackup

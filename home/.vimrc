@@ -80,6 +80,7 @@ call dein#begin(expand('~/.vim/dein'))
   call dein#add('tyru/open-browser.vim')
   call dein#add('ujihisa/unite-colorscheme')
   call dein#add('w0ng/vim-hybrid')
+  call dein#add('cocopon/iceberg.vim')
   call dein#add('elzr/vim-json')
   call dein#add('lilydjwg/colorizer')
   call dein#add('akiyan/vim-textobj-php')
@@ -87,7 +88,6 @@ call dein#begin(expand('~/.vim/dein'))
   call dein#add('cocopon/lightline-hybrid.vim')
   call dein#add('Lokaltog/vim-easymotion')
   call dein#add('kchmck/vim-coffee-script')
-  call dein#add('haya14busa/incsearch.vim')
   call dein#add('kana/vim-filetype-haskell')
   call dein#add('eagletmt/ghcmod-vim')
 
@@ -97,14 +97,9 @@ call dein#begin(expand('~/.vim/dein'))
 
   call dein#add('osyo-manga/vim-watchdogs')
   call dein#add('junegunn/vim-easy-align')
-  call dein#add('lambdalisue/vim-gita')
   call dein#add('joonty/vdebug')
   call dein#add('posva/vim-vue')
 
-  "call dein#add('ternjs/tern_for_vim', { 'build': 'npm install' })
-  "call dein#add('othree/es.next.syntax.vim')
-  "call dein#add('MaxMellon/vim-jsx-pretty')
-  "call dein#add('othree/yajs.vim')
   call dein#add('vim-scripts/Simple-Javascript-Indenter')
   call dein#add('jelera/vim-javascript-syntax')
   call dein#add('othree/javascript-libraries-syntax.vim')
@@ -128,7 +123,7 @@ filetype plugin indent on
 
 " option settings {{{
 syntax on
-colorscheme hybrid
+colorscheme iceberg
 
 set autoindent " 新しい行のインデントを現在行と同じにする
 set smartindent " 新しい行を作った際に高度な自動インデントを行う
@@ -182,6 +177,15 @@ set matchpairs& matchpairs+=<:> " <>をマッチパターンに加える
 set background=dark
 
 set noundofile
+
+"set t_RC=
+
+augroup vimrc-incsearch-highlight
+  autocmd!
+	autocmd CmdlineEnter /,\? :set hlsearch
+  "autocmd CmdlineLeave /,\? :set nohlsearch
+augroup END
+
 " }}}
 
 " mappings {{{
@@ -219,7 +223,6 @@ inoremap <C-z> <CR><C-u>
 
 nnoremap <silent>,tn :tabnext<CR>
 nnoremap <silent>,tt :tabnew<CR>
-
 nnoremap <C-TAB> gt
 nnoremap <C-S-TAB> gT
 
@@ -230,12 +233,6 @@ nnoremap <C-S-TAB> gT
 " 検索結果のハイライトをEsc連打でクリアする
 nnoremap <ESC><ESC> :nohlsearch<CR>
 
-" コピー系
-"nnoremap <silent>,p "0p
-
-"inoremap <expr> j  getline('.')[col('.') - 2] ==# 'j' ? "\<BS>\<ESC>" : 'j'
-
-" PHP用?
 inoremap <C-d> $
 inoremap <C-d><C-d> $this->
 "}}}
@@ -350,7 +347,7 @@ let g:neosnippet#snippets_directory='~/.vim/dein/repos/github.com/Shougo/vim-sni
 
 " lightline settings
 let g:lightline = {
-    \ 'colorscheme': 'hybrid',
+    \ 'colorscheme': 'iceberg',
     \ 'separator': { 'left': "\u2b80", 'right': "\u2b82" },
     \ 'subseparator': { 'left': "\u2b81", 'right': "\u2b83" },
     \ 'mode_map': {'c': 'NORMAL'},
@@ -483,12 +480,6 @@ omap g/ <Plug>(easymotion-tn)
 
 "operator-replace
 map _ <Plug>(operator-replace)
-
-
-" incsearch
-map / <Plug>(incsearch-forward)
-map ? <Plug>(incsearch-backward)
-map g/ <Plug>(incsearch-stay)
 
 " easy-align
 xmap ga <Plug>(EasyAlign)
