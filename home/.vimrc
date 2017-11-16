@@ -179,6 +179,8 @@ set background=dark
 
 set noundofile
 
+set autowrite
+
 "set t_RC=
 
 augroup vimrc-incsearch-highlight
@@ -494,6 +496,11 @@ let wtitvim_force_ssl = 1
 let twitvim_count = 40
 let twitvim_enable_python = 1
 
+"vim-go
+map <C-n> :cnext<CR>
+map <C-m> :cprevious<CR>
+nnoremap <leader>a :cclose<CR>
+
 " augroup {{{
 augroup myGroup
   autocmd FileType javascript call s:javascript_filetype_settings()
@@ -511,6 +518,7 @@ augroup myGroup
   autocmd BufRead,BufNewFile,BufReadpre *.blade.php set filetype=blade
   autocmd BufNewFile,BufRead *.volt set filetype=htmldjango
   autocmd BufNewFile,BufRead *.tag setlocal ft=javascript
+  autocmd FileType go call s:go_filetype_settings()
 augroup END
 " }}}
 function! s:javascript_filetype_settings()
@@ -546,6 +554,12 @@ endfunction
 function! s:coffee_filetype_settings()
   setlocal tabstop=2
   setlocal shiftwidth=2
+endfunction
+
+" go
+function! s:go_filetype_settings()
+  nmap <Leader>b <Plug>(go-build)
+  nmap <Leader>r <Plug>(go-run)
 endfunction
 
 " functions
