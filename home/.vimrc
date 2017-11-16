@@ -107,8 +107,9 @@ call dein#begin(expand('~/.vim/dein'))
   call dein#add('leafgarland/typescript-vim', { 'on_ft': 'typescript' })
   call dein#add('Quramy/tsuquyomi', { 'on_ft': 'typescript' })
   call dein#add('twitvim/twitvim')
-  call dein#add('cespare/vim-toml')
 
+  call dein#add('fatih/vim-go')
+  1
   call dein#end()
   call dein#save_state()
 endif
