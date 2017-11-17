@@ -222,6 +222,7 @@ vnoremap > >gv
 "Shift + Enterで改行して行頭削除(自動コメント挿入を消す)
 inoremap <S-CR> <CR><C-u>
 nnoremap <S-CR> o<C-u>
+nnoremap <C-z> <CR><C-u>
 inoremap <C-z> <CR><C-u>
 
 nnoremap <silent>,tn :tabnext<CR>
