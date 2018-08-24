@@ -15,6 +15,7 @@ path=( # システム用
     # 自分用
     /$HOME/bin(N-/)
     /$HOME/python(N-/)
+    /$HOME/.nodebrew/current/bin(N-/)
     # システム用
     /usr/bin(N-)
     /usr/sbin(N-)

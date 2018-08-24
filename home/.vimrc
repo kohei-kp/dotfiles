@@ -40,11 +40,20 @@ call dein#begin(expand('~/.vim/dein'))
   call dein#add('Shougo/neosnippet-snippets')
   call dein#add('Shougo/vimshell')
   call dein#add('Shougo/unite.vim')
-  call dein#add('Shougo/neocomplete.vim')
   call dein#add('Shougo/vimfiler.vim')
   call dein#add('Shougo/junkfile.vim')
   call dein#add('Shougo/neomru.vim')
   call dein#add('Shougo/vimproc.vim', { 'build' : 'make' })
+
+  "if ((has('nvim') || has('timers')) && has('python3')) && system('pip3 show neovim') !=# ''
+  "  call dein#add('Shougo/deoplete.nvim')
+  "  if !has('nvim')
+  "    call dein#add('roxma/nvim-yarp')
+  "    call dein#add('roxma/vim-hug-neovim-rpc')
+  "  endif
+  "elseif has('lua')
+  call dein#add('Shougo/neocomplete.vim')
+  "endif
 
   call dein#add('thinca/vim-quickrun')
   call dein#add('thinca/vim-ref')
@@ -100,7 +109,7 @@ call dein#begin(expand('~/.vim/dein'))
   call dein#add('joonty/vdebug')
   call dein#add('posva/vim-vue')
 
-  call dein#add('vim-scripts/Simple-Javascript-Indenter')
+"  call dein#add('vim-scripts/simple-javascript-indenter')
   call dein#add('jelera/vim-javascript-syntax')
   call dein#add('othree/javascript-libraries-syntax.vim')
   call dein#add('vim-scripts/jQuery')
@@ -109,7 +118,9 @@ call dein#begin(expand('~/.vim/dein'))
   call dein#add('twitvim/twitvim')
 
   call dein#add('fatih/vim-go')
-  1
+
+  call dein#add('w0rp/ale')
+
   call dein#end()
   call dein#save_state()
 endif
@@ -244,6 +255,9 @@ inoremap <C-d><C-d> $this->
 "現在開いているディレクトリをルートディレクトリにする
 command! Cd :cd %:h
 
+" depplete
+let g:deoplete#enable_at_startup = 1
+
 " neocomplete
 let g:acp_enableAtStartup = 0
 let g:neocomplete#enable_at_startup = 1
@@ -349,6 +363,9 @@ endif
 " Tell neosnippet about th other snippets
 let g:neosnippet#snippets_directory='~/.vim/dein/repos/github.com/Shougo/vim-snippets/snippets, ~/.vim/mysnippets'
 
+" ale
+let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
+
 " lightline settings
 let g:lightline = {
     \ 'colorscheme': 'iceberg',
@@ -356,7 +373,7 @@ let g:lightline = {
     \ 'subseparator': { 'left': "\u2b81", 'right': "\u2b83" },
     \ 'mode_map': {'c': 'NORMAL'},
     \ 'active': {
-    \   'left': [ [ 'mode', 'paste' ], [ 'fugitive','filename' ],['anzu'] ]
+    \   'left': [ [ 'mode', 'paste' ], [ 'fugitive','filename' ], ['anzu'], ['ale'] ]
     \ },
     \ 'component_function': {
     \   'modified': 'MyModified',
@@ -367,7 +384,8 @@ let g:lightline = {
     \   'filetype': 'MyFiletype',
     \   'fileencoding': 'MyFileencoding',
     \   'mode': 'MyMode',
-    \   'anzu': 'anzu#search_status'
+    \   'anzu': 'anzu#search_status',
+    \   'ale': 'ALEStatus'
     \ }
     \ }
 
@@ -418,8 +436,12 @@ function! MyMode()
   return winwidth(0) > 60 ? lightline#mode() : ''
 endfunction
 
+function! ALEStatus()
+  return ALEGetStatusLine()
+endfunction
+
 " SimpleJsIndenter
-let g:SimpleJsIndenter_BriefMode = 1
+"let g:SimpleJsIndenter_BriefMode = 0
 " let g:SimpleJsIndenter_CaseIndentLevel = -1
 
 " javascript-libraries-syntax
