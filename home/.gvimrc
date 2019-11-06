@@ -6,7 +6,7 @@
 "基本的な設定
 "-------------------
 set showtabline=2
-set transparency=3
+set transparency=0
 set imdisable
 "ツールバー非表示
 set guioptions-=T
@@ -22,6 +22,6 @@ set nowrapscan
 set columns=100
 set lines=48
 set tabstop=4
-set guifont=Ricty:h14
+set guifont=Ricty:h12.5
 
 hi LineNr ctermbg=black guifg=#778899

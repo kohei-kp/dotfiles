@@ -4,7 +4,7 @@ export LANG=ja_JP.UTF-8
 export LC_ALL=$LANG
 export LANGUAGE=$LANG
 export TZ=JST-9
-export GOPATH=~/go
+export GOPATH=$HOME/go
 export EDITOR=vim
 path=( # システム用
     /usr/local/opt/coreutils/libexec/gnubin(N-/)

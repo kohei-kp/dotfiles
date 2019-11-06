@@ -19,118 +19,68 @@ if has('vim_starting') && has('reltime')
   augroup END
 endif
 
-if &compatible
-  set nocompatible               " Be iMproved
-endif
+" VimPlug
+call plug#begin('~/.vim/plugged')
 
-"neobundle
-if has('vim_starting')
-  set runtimepath+=~/.vim/dein/repos/github.com/Shougo/dein.vim/
-  set runtimepath+=~/.vim/dein/repos/github.com/vim-jp/vital.vim/
-endif
+  Plug 'thinca/vim-quickrun'
+  Plug 'kana/vim-textobj-user'
+  Plug 'kana/vim-textobj-entire'
+  Plug 'kana/vim-textobj-function'
+  Plug 'kana/vim-textobj-line'
+  Plug 'kana/vim-textobj-datetime'
+  Plug 'kana/vim-operator-replace'
+  Plug 'kana/vim-operator-user'
+  Plug 'osyo-manga/vim-anzu'
+  Plug 'osyo-manga/vim-textobj-blockwise'
+  Plug 'osyo-manga/vim-operator-blockwise'
+  Plug 'osyo-manga/vim-watchdogs'
+  Plug 'itchyny/lightline.vim'
+  Plug 'mattn/emmet-vim'
+  Plug 'tpope/vim-surround'
+  Plug 'tpope/vim-fugitive'
+  Plug 'rhysd/clever-f.vim'
+  Plug 'posva/vim-vue'
+  Plug 'fatih/vim-go'
+  Plug 'w0rp/ale'
 
-" Let dein manage dein
+  Plug 'lilydjwg/colorizer'
+  Plug 'cocopon/lightline-hybrid.vim'
+  Plug 'cocopon/vaffle.vim'
 
-if dein#load_state('~/.vim/dein')
 
-call dein#begin(expand('~/.vim/dein'))
+  Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 
-  call dein#add('Shougo/dein.vim')
-  call dein#add('Shougo/neosnippet.vim')
-  call dein#add('Shougo/neosnippet-snippets')
-  call dein#add('Shougo/vimshell')
-  call dein#add('Shougo/unite.vim')
-  call dein#add('Shougo/vimfiler.vim')
-  call dein#add('Shougo/junkfile.vim')
-  call dein#add('Shougo/neomru.vim')
-  call dein#add('Shougo/vimproc.vim', { 'build' : 'make' })
+  Plug 'prettier/vim-prettier', {
+    \ 'do': 'yarn install',
+    \ 'branch': 'release/1.x',
+    \ 'for': [
+    \ 'javascript',
+    \ 'typescript',
+    \ 'css',
+    \ 'less',
+    \ 'scss',
+    \ 'json',
+    \ 'graphql',
+    \ 'markdown',
+    \ 'vue',
+    \ 'lua',
+    \ 'php',
+    \ 'python',
+    \ 'ruby',
+    \ 'html',
+    \ 'swift' ] }
 
-  "if ((has('nvim') || has('timers')) && has('python3')) && system('pip3 show neovim') !=# ''
-  "  call dein#add('Shougo/deoplete.nvim')
-  "  if !has('nvim')
-  "    call dein#add('roxma/nvim-yarp')
-  "    call dein#add('roxma/vim-hug-neovim-rpc')
-  "  endif
-  "elseif has('lua')
-  call dein#add('Shougo/neocomplete.vim')
-  "endif
+  Plug 'leafgarland/typescript-vim'
+  Plug 'pangloss/vim-javascript'
+  Plug 'othree/javascript-libraries-syntax.vim'
 
-  call dein#add('thinca/vim-quickrun')
-  call dein#add('thinca/vim-ref')
+  " colorscheme
+  Plug 'cocopon/iceberg.vim'
+  Plug 'w0ng/vim-hybrid'
+  Plug 'sainnhe/vim-color-atlantis'
 
-  call dein#add('kana/vim-textobj-user')
-  call dein#add('kana/vim-textobj-entire')
-  call dein#add('kana/vim-textobj-indent')
-  call dein#add('kana/vim-textobj-function')
-  call dein#add('kana/vim-textobj-line')
-  call dein#add('kana/vim-textobj-datetime')
-  call dein#add('kana/vim-operator-replace')
-  call dein#add('kana/vim-operator-user')
+call plug#end()
 
-  call dein#add('osyo-manga/vim-anzu')
-  call dein#add('osyo-manga/vim-textobj-blockwise')
-  call dein#add('osyo-manga/vim-operator-blockwise')
-
-  call dein#add('itchyny/lightline.vim')
-
-  call dein#add('mattn/webapi-vim')
-  call dein#add('mattn/emmet-vim')
-
-  call dein#add('tpope/vim-surround')
-  call dein#add('tpope/vim-markdown')
-
-  call dein#add('vim-jp/vital.vim')
-  call dein#add('vim-scripts/L9')
-  call dein#add('rhysd/clever-f.vim')
-  call dein#add('vim-scripts/sudo.vim')
-  call dein#add('Yggdroot/indentLine')
-  call dein#add('davidhalter/jedi-vim')
-  call dein#add('kannokanno/previm')
-  call dein#add('tyru/open-browser.vim')
-  call dein#add('ujihisa/unite-colorscheme')
-  call dein#add('w0ng/vim-hybrid')
-  call dein#add('cocopon/iceberg.vim')
-  call dein#add('elzr/vim-json')
-  call dein#add('lilydjwg/colorizer')
-  call dein#add('akiyan/vim-textobj-php')
-  call dein#add('vim-scripts/taglist.vim')
-  call dein#add('cocopon/lightline-hybrid.vim')
-  call dein#add('Lokaltog/vim-easymotion')
-  call dein#add('kchmck/vim-coffee-script')
-  call dein#add('kana/vim-filetype-haskell')
-  call dein#add('eagletmt/ghcmod-vim')
-
-  call dein#add('ujihisa/neco-ghc')
-  call dein#add('ujihisa/ref-hoogle')
-  call dein#add('ujihisa/unite-haskellimport')
-
-  call dein#add('osyo-manga/vim-watchdogs')
-  call dein#add('junegunn/vim-easy-align')
-  call dein#add('joonty/vdebug')
-  call dein#add('posva/vim-vue')
-
-"  call dein#add('vim-scripts/simple-javascript-indenter')
-  call dein#add('jelera/vim-javascript-syntax')
-  call dein#add('othree/javascript-libraries-syntax.vim')
-  call dein#add('vim-scripts/jQuery')
-  call dein#add('leafgarland/typescript-vim', { 'on_ft': 'typescript' })
-  call dein#add('Quramy/tsuquyomi', { 'on_ft': 'typescript' })
-  call dein#add('twitvim/twitvim')
-
-  call dein#add('fatih/vim-go')
-
-  call dein#add('w0rp/ale')
-
-  call dein#end()
-  call dein#save_state()
-endif
-
-" If you want to install not installed plugins on startup.
-if dein#check_install()
-  call dein#install()
-endif
-
-"End dein Scripts-------------------------
 filetype plugin indent on
 
 " option settings {{{
@@ -192,11 +142,9 @@ set noundofile
 
 set autowrite
 
-"set t_RC=
-
 augroup vimrc-incsearch-highlight
   autocmd!
-	autocmd CmdlineEnter /,\? :set hlsearch
+  autocmd CmdlineEnter /,\? :set hlsearch
   "autocmd CmdlineLeave /,\? :set nohlsearch
 augroup END
 
@@ -241,64 +189,17 @@ nnoremap <silent>,tt :tabnew<CR>
 nnoremap <C-TAB> gt
 nnoremap <C-S-TAB> gT
 
-"nnoremap <F1> :e $MYVIMRC<CR>
-"nnoremap <F5> :source $MYVIMRC<CR>
-"nnoremap <F6> :source $MYGIVIMRC<CR>
-
 " 検索結果のハイライトをEsc連打でクリアする
 nnoremap <ESC><ESC> :nohlsearch<CR>
 
-inoremap <C-d> $
 inoremap <C-d><C-d> $this->
 "}}}
 
 "現在開いているディレクトリをルートディレクトリにする
 command! Cd :cd %:h
 
-" depplete
-let g:deoplete#enable_at_startup = 1
-
-" neocomplete
-let g:acp_enableAtStartup = 0
-let g:neocomplete#enable_at_startup = 1
-let g:neocomplete#enable_smart_case = 1
-let g:neocomplcache_max_list = 20
-let g:neocomplete#sources#syntax#min_keyword_length = 3
-let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
-let g:neocomplete#disable_auto_complete = 0
-let g:neocomplete#enable_auto_select = 0
-let g:neocomplete#enable_insert_char_pre = 1
-set completeopt& completeopt-=preview
-
-let g:neocomplete#sources#dictionary#dictionaries = {
-    \ 'default':    '',
-    \ 'vimshell':   $HOME .    '/.vimshell_hist',
-    \ }
-" Define keyword.
-if !exists('g:neocomplete#keyword_patterns')
-    let g:neocomplete#keyword_patterns = {}
-endif
-let g:neocomplete#keyword_patterns._ = '\h\w*'
-
-" Plugin key-mappings.
-inoremap <expr><C-g> neocomplete#undo_completion()
-inoremap <expr><C-l> neocomplete#complete_common_string()
 " <TAB>: completion.
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-
-" jedi neocomplete 連携
-let g:jedi#auto_vim_configuration = 0
-
-if !exists('neocomplete#force_omni_input_patterns')
-    let g:neocomplete#force_omni_input_patterns = {}
-endif
-
-let g:neocomplete#force_omni_input_patterns.python = '\h\w*\|[^. \t]\.\w*'
-
-" jediメソッド定義をオフ
-let g:jedi#show_call_signatures = 0
-" .で自動補完しない
-let g:jedi#popup_on_dot = 0
 
 " vim anzu
 nmap n <Plug>(anzu-n)
@@ -310,58 +211,6 @@ augroup vim-anzu
   autocmd!
   autocmd CursorHold,CursorHoldI,WinLeave,TabLeave * call anzu#clear_search_status() 
 augroup END
-
-" unite
-nnoremap <silent> ,uy :<C-u>Unite history/yank<CR>
-nnoremap <silent> ,ub :<C-u>Unite buffer<CR>
-nnoremap <silent> ,uf :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
-nnoremap <silent> ,ur :<C-u>Unite -buffer-name=register register<CR>
-nnoremap <silent> ,uu :<C-u>Unite file_mru buffer<CR>
-" バッファーのgrep
-nnoremap <silent> ,ug :<C-u>Unite grep:. -buffer-name=search-buffer<CR>
-" ディレクトリ下のgrep
-nnoremap <silent> ,ud :<C-u>Unite grep -buffer-name=search-buffer<CR>
-" カーソル下のgrep
-nnoremap <silent> ,uc :<C-u>Unite grep:. -buffer-name=search-buffer<CR><C-R><C-W><CR>
-" grep検索結果の再呼び出し
-nnoremap <silent> ,r :<C-u>UniteResume search-buffer<CR>
-
-" Unite grepにagを使う
-if (executable('ag'))
-  let g:unite_source_grep_command = 'ag'
-  let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
-  let g:unite_source_grep_recursive_opt = ''
-endif
-
-
-" open-browser
-nmap <Leader>w <Plug>(openbrowser-smart-search)
-
-" vimshell
-nnoremap <silent> ,s :VimShell<CR>
-
-" vimFiler
-nnoremap <silent> ,f :VimFiler<CR>
-"neosnippet
-" Plugin key-mappings.
-imap <C-k> <Plug>(neosnippet_expand_or_jump)
-smap <C-k> <Plug>(neosnippet_expand_or_jump)
-xmap <C-k> <Plug>(neosnippet_expand_target)
-
-" SuperTab like snippets behavior.
-imap <expr><TAB> pumvisible() ?
-\ "\<C-n>" : neosnippet#jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-smap <expr><TAB> neosnippet#jumpable() ?
-\"\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-
-" For snippet_complete marker.
-if has('conceal')
-  set conceallevel=2 concealcursor=i
-endif
-
-" Tell neosnippet about th other snippets
-let g:neosnippet#snippets_directory='~/.vim/dein/repos/github.com/Shougo/vim-snippets/snippets, ~/.vim/mysnippets'
 
 " ale
 let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
@@ -394,30 +243,21 @@ let g:lightline.tabline = {
     \}
 
 function! MyModified()
-  return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+  return &ft =~ 'help|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
 endfunction
 
 function! MyReadonly()
-  return &ft !~? 'help\|vimfiler\|gundo' && &readonly ? 'x' : ''
+  return &ft !~? 'help|gundo' && &readonly ? 'x' : ''
 endfunction
 
 function! MyFilename()
   return ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
-        \ (&ft == 'vimfiler' ? vimfiler#get_status_string() :
-        \  &ft == 'unite' ? unite#get_status_string() :
-        \  &ft == 'vimshell' ? vimshell#get_status_string() :
-        \ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
+        \ ('' != expand('%:t') ? expand('%:t') : '[No Name]') .
         \ ('' != MyModified() ? ' ' . MyModified() : '')
 endfunction
 
 function! MyFugitive()
-  try
-    if &ft !~? 'vimfiler\|gundo' && exists('*fugitive#head')
-      return fugitive#head()
-    endif
-  catch
-  endtry
-  return ''
+  return fugitive#head()
 endfunction
  
 function! MyFileformat()
@@ -437,87 +277,26 @@ function! MyMode()
 endfunction
 
 function! ALEStatus()
-  return ALEGetStatusLine()
+  return LinterStatus()
 endfunction
 
-" SimpleJsIndenter
-"let g:SimpleJsIndenter_BriefMode = 0
-" let g:SimpleJsIndenter_CaseIndentLevel = -1
+function! LinterStatus() abort
+  let l:counts = ale#statusline#Count(bufnr(''))
 
-" javascript-libraries-syntax
-let g:used_javascript_libs = 'jquery,angularjs,angularui'
+  let l:all_errors = l:counts.error + l:counts.style_error
+  let l:all_non_errors = l:counts.total - l:all_errors
 
-" easy motion copy
-" =======================================
-" Boost your productivity with EasyMotion
-" =======================================
-" Disable default mappings
-" If you are true vimmer, you should explicitly map keys by yourself.
-" Do not rely on default bidings.
-let g:EasyMotion_do_mapping = 0
-
-" Or map prefix key at least(Default: <Leader><Leader>)
-" map <Leader> <Plug>(easymotion-prefix)
-
-" =======================================
-" Find Motions
-" =======================================
-" Jump to anywhere you want by just `4` or `3` key strokes without thinking!
-" `s{char}{char}{target}`
-nmap s <Plug>(easymotion-s2)
-xmap s <Plug>(easymotion-s2)
-omap z <Plug>(easymotion-s2)
-" Of course, you can map to any key you want such as `<Space>`
-" map <Space>(easymotion-s2)
-
-" Turn on case sensitive feature
-let g:EasyMotion_smartcase = 1
-
-" =======================================
-" Line Motions
-" =======================================
-" `JK` Motions: Extend line motions
-map <Leader>j <Plug>(easymotion-j)
-map <Leader>k <Plug>(easymotion-k)
-" keep cursor column with `JK` motions
-let g:EasyMotion_startofline = 0
-
-" =======================================
-" General Configuration
-" =======================================
-let g:EasyMotion_keys = ';HKLYUIOPNM,QWERTASDGZXCVBJF'
-" Show target key with upper case to improve readability
-let g:EasyMotion_use_upper = 1
-" Jump to first match with enter & space
-let g:EasyMotion_enter_jump_first = 1
-let g:EasyMotion_space_jump_first = 1
-
-" =======================================
-" Search Motions
-" =======================================
-" Extend search motions with vital-over command line interface
-" Incremental highlight of all the matches
-" Now, you don't need to repetitively press `n` or `N` with EasyMotion feature
-" `<Tab>` & `<S-Tab>` to scroll up/down a page with next match
-" :h easymotion-command-line
-nmap g/ <Plug>(easymotion-sn)
-xmap g/ <Plug>(easymotion-sn)
-omap g/ <Plug>(easymotion-tn)
+  return l:counts.total == 0 ? 'OK' : printf(
+    \   '%dW %dE',
+    \   all_non_errors,
+    \   all_errors
+  \)
+endfunction
 
 "operator-replace
 map _ <Plug>(operator-replace)
 
-" easy-align
-xmap ga <Plug>(EasyAlign)
-nmap ga <Plug>(EasyAlign)
-
 nnoremap <Leader>/ /
-
-" twitvim
-let twitvim_browser_cmd = 'open'
-let wtitvim_force_ssl = 1
-let twitvim_count = 40
-let twitvim_enable_python = 1
 
 "vim-go
 map <C-n> :cnext<CR>
@@ -526,20 +305,13 @@ nnoremap <leader>a :cclose<CR>
 
 " augroup {{{
 augroup myGroup
-  autocmd FileType javascript call s:javascript_filetype_settings()
+  autocmd FileType javascript,vue call s:javascript_filetype_settings()
   autocmd FileType html call s:html_filetype_settings()
   autocmd FileType css  call s:css_filetype_settings()
   autocmd FileType less call s:css_filetype_settings()
   autocmd FileType vim call s:vim_filetype_settings()
-  autocmd FileType python call s:py_filetype_settings()
-  autocmd BufNewFile,BufRead *.vue set filetype=html
-  autocmd BufRead,BufNewFile jquery.*.js set ft=javascript syntax=jquery
   autocmd BufRead,BufNewFile *.md set filetype=markdown
   autocmd BufRead,BufNewFile *.json,*jsonp,*.geojson,*.topojson set filetype=json
-  autocmd BufRead,BufNewFile,BufReadPre *.coffee set filetype=coffee
-  autocmd FileType coffee call s:coffee_filetype_settings()
-  autocmd BufRead,BufNewFile,BufReadpre *.blade.php set filetype=blade
-  autocmd BufNewFile,BufRead *.volt set filetype=htmldjango
   autocmd BufNewFile,BufRead *.tag setlocal ft=javascript
   autocmd FileType go call s:go_filetype_settings()
 augroup END
@@ -568,58 +340,11 @@ function! s:vim_filetype_settings()
   setlocal shiftwidth=2
 endfunction
 
-" py
-function! s:py_filetype_settings()
-  setlocal omnifunc=jedi#completions
-endfunction
-
-" coffee
-function! s:coffee_filetype_settings()
-  setlocal tabstop=2
-  setlocal shiftwidth=2
-endfunction
-
 " go
 function! s:go_filetype_settings()
   nmap <Leader>b <Plug>(go-build)
   nmap <Leader>r <Plug>(go-run)
 endfunction
-
-" functions
-" 地名から緯度経度を取得-> :messageに残るように, clipboardにも入れる
-function! s:getLonLat(address)
-  let url = 'http://maps.googleapis.com/maps/api/geocode'
-  let parameter = 'address='. a:address.'&sensor=false'
-  "use webapi-vim
-  let res = webapi#http#get(url. '/json?'. parameter)
-
-  if res.status !~"^2.*"
-    echo ['error', 'Failed']
-    return 0
-  endif
-
-  let content = webapi#json#decode(res.content)
-  let results = content.results
-  let location = results[0].geometry.location
-  let dict = {'Lon': string(location.lng), 'Lat': string(location.lat)}
-
-  let str = a:address. ' Lon:' . dict.Lon . ' | Lat:' . dict.Lat
-  echomsg str
-
-  let lonlat = dict.Lon . ', ' . dict.Lat
-  call setreg(v:register, lonlat)
-
-  " ファイルに書き込む
-  let outputfile = '$HOME/lonlats.txt'
-  execute ':redir! >> ' . outputfile
-    silent! echo str
-  redir END
-  "call writefile(str, outputfile)
-
-  "echo readfile($HOME . '/lonlats.txt')
-endfunction
-command! -nargs=1 GetLonLat :call s:getLonLat(<f-args>)
-nnoremap ,ll :GetLonLat 
 
 " vnewしたあと、指定ファイルタイプに変更
 function! s:setFileTypeForNewBuf(file_type)
@@ -628,30 +353,26 @@ function! s:setFileTypeForNewBuf(file_type)
 endfunction
 command! -nargs=1 SetFileTypeForNewBuf :call s:setFileTypeForNewBuf(<f-args>)
 nnoremap ,sf :SetFileTypeForNewBuf 
-
-" unite source sample {{{
-let s:source = {
-\ 'name': 'lonlats',
-\ 'description': 'example unite lonlats',
-\ }
-
-function! s:source.gather_candidates(args, context)
-  " lonlats.txt内容取得
-  let file_content = readfile($HOME . '/lonlats.txt')
-
-  " 表示する
-  return map(copy(file_content), '{
-  \ "word": v:val,
-  \ "kind": "word",
-  \ }')
-endfunction
-
-call unite#define_source(s:source)
-unlet s:source
 " }}}
 
 " インクリメント、デクリメント
 nnoremap + <C-A>
 nnoremap - <C-X>
+
+" vim-prettier
+" when running at every change you may want to disable quickfix
+let g:prettier#autoformat = 0
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
+
+" Vaffle
+nnoremap ,f :Vaffle<CR>
+
+let g:vaffle_auto_cd=1
+
+" coc.nvim
+nmap <silent> ,d <Plug>(coc-definition)
+nmap <silent> ,y <Plug>(coc-type-definition)
+nmap <silent> ,i <Plug>(coc-implementation)
+nmap <silent> ,r <Plug>(coc-references)
 
 " vim: set foldmethod=marker:
