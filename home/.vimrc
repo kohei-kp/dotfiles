@@ -170,8 +170,8 @@ nnoremap j gj
 nnoremap k gk
 nnoremap gj j
 nnoremap gk k
-nnoremap <C-h> ^
-nnoremap <C-l> $
+nnoremap <silent><Space>h ^
+nnoremap <silent><Space>l $
 
 cnoremap <C-l> <Right>
 cnoremap <C-h> <Left>
