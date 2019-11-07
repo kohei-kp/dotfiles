@@ -50,25 +50,25 @@ call plug#begin('~/.vim/plugged')
 
   Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 
-  Plug 'prettier/vim-prettier', {
-    \ 'do': 'yarn install',
-    \ 'branch': 'release/1.x',
-    \ 'for': [
-    \ 'javascript',
-    \ 'typescript',
-    \ 'css',
-    \ 'less',
-    \ 'scss',
-    \ 'json',
-    \ 'graphql',
-    \ 'markdown',
-    \ 'vue',
-    \ 'lua',
-    \ 'php',
-    \ 'python',
-    \ 'ruby',
-    \ 'html',
-    \ 'swift' ] }
+  "Plug 'prettier/vim-prettier', {
+  "  \ 'do': 'yarn install',
+  "  \ 'branch': 'release/1.x',
+  "  \ 'for': [
+  "  \ 'javascript',
+  "  \ 'typescript',
+  "  \ 'css',
+  "  \ 'less',
+  "  \ 'scss',
+  "  \ 'json',
+  "  \ 'graphql',
+  "  \ 'markdown',
+  "  \ 'vue',
+  "  \ 'lua',
+  "  \ 'php',
+  "  \ 'python',
+  "  \ 'ruby',
+  "  \ 'html',
+  "  \ 'swift' ] }
 
   Plug 'leafgarland/typescript-vim'
   Plug 'pangloss/vim-javascript'
@@ -142,6 +142,8 @@ set noundofile
 
 set autowrite
 
+set splitright
+
 augroup vimrc-incsearch-highlight
   autocmd!
   autocmd CmdlineEnter /,\? :set hlsearch
@@ -168,9 +170,8 @@ nnoremap j gj
 nnoremap k gk
 nnoremap gj j
 nnoremap gk k
-nnoremap <Space>h ^
-nnoremap <Space>l $
-nnoremap <Space>] %
+nnoremap <C-h> ^
+nnoremap <C-l> $
 
 cnoremap <C-l> <Right>
 cnoremap <C-h> <Left>
@@ -237,7 +238,6 @@ let g:lightline = {
     \   'ale': 'ALEStatus'
     \ }
     \ }
-
 let g:lightline.tabline = {
     \ 'colorscheme': 'hybrid'
     \}
@@ -361,18 +361,22 @@ nnoremap - <C-X>
 
 " vim-prettier
 " when running at every change you may want to disable quickfix
-let g:prettier#autoformat = 0
-autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
+" let g:prettier#autoformat = 0
+" autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
 
 " Vaffle
 nnoremap ,f :Vaffle<CR>
 
 let g:vaffle_auto_cd=1
+let g:vaffle_open_selected_vsplit_position='rightbelow'
+
 
 " coc.nvim
 nmap <silent> ,d <Plug>(coc-definition)
 nmap <silent> ,y <Plug>(coc-type-definition)
 nmap <silent> ,i <Plug>(coc-implementation)
 nmap <silent> ,r <Plug>(coc-references)
+
+command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
 
 " vim: set foldmethod=marker:
