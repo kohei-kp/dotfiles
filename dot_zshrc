@@ -1,0 +1,38 @@
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# 補完
+autoload -U compinit
+compinit
+
+# プロンプトカラー表示を有効に
+autoload -U colors
+colors
+
+## ヒストリ
+HISTFILE=~/.zsh_history
+HISTSIZE=10000000
+SAVEHIST=100000000
+setopt extended_history
+setopt hist_ignore_dups
+setopt hist_ignore_space
+setopt inc_append_history
+setopt share_history
+setopt no_flow_control
+setopt hist_ignore_all_dups
+
+setopt auto_cd
+
+eval "$(starship init zsh)"
+
+## zsh-autocompletions
+if type brew &>/dev/null; then
+    FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+
+    autoload -Uz compinit
+    compinit
+fi
+
+## zsh-autosuggestions
+source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+. /opt/homebrew/opt/asdf/libexec/asdf.sh

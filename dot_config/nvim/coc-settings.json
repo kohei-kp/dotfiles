@@ -1,0 +1,27 @@
+{
+    "diagnostic.displayByAle": false,
+    "go.goplsOptions": {
+        "completeUnimported": true
+    },
+    "typescript.suggest.autoImports": true,
+    "coc.preferences.formatOnSaveFiletypes": ["javascript", "css", "vue", "typescript", "javascriptreact", "typescriptreact", "rust"],
+    "vetur.enable": false,
+    "vetur.format.defaultFormatter.html": "prettier",
+    "vetur.format.defaultFormatter.css": "prettier",
+    "vetur.format.defaultFormatter.js": "prettier-eslint",
+    "css.validate": false,
+    "less.validate": false,
+    "scss.validate": false,
+    "wxss.validate": false,
+    "jedi": {
+        "enable": true,
+        "startupMessage": false,
+        "executable.command": "jedi-language-server",
+    },
+    "diagnostic-languageserver.filetypes": {
+        "python": ["flake8"],
+    },
+    "diagnostic-languageserver.formatFletypes": {
+        "python": ["black"],
+    }
+}
