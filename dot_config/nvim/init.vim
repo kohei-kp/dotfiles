@@ -91,7 +91,6 @@ endif
 
 syntax enable
 colorscheme iceberg
-" colorscheme iceberg
 set background=dark
 
 set autoindent " 新しい行のインデントを現在行と同じにする
@@ -256,6 +255,7 @@ augroup myGroup
   autocmd BufWritePre *.go :CocCommand editor.action.organizeImport
   autocmd QuickfixCmdPost make,grep,grepadd,vimgrep copen
   autocmd BufWritePost $MYVIMRC source % | call lightline#enable()
+  autocmd BufWritePost ~/.local/share/chezmoi/* ! chezmoi apply --source-path "%"
 augroup END
 " }}}
 "
