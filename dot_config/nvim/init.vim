@@ -90,7 +90,7 @@ if (has("termguicolors"))
 endif
 
 syntax enable
-colorscheme iceberg
+colorscheme everforest
 set background=dark
 
 set autoindent " 新しい行のインデントを現在行と同じにする
@@ -317,7 +317,7 @@ let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
 let g:ale_use_global_executables = 1
 " lightline settings
 let g:lightline = {
-    \ 'colorscheme': 'iceberg',
+    \ 'colorscheme': 'everforest',
     \ 'separator': { 'left': "\ue0b0", 'right': "\ue0b2" },
     \ 'subseparator': { 'left': "\ue0b0", 'right': "\ue0b3" },
     \ 'mode_map': {'c': 'NORMAL'},
@@ -338,7 +338,7 @@ let g:lightline = {
     \ }
     \ }
 let g:lightline.tabline = {
-    \ 'colorscheme': 'iceberg'
+    \ 'colorscheme': 'everforest'
     \}
 
 function! MyModified()
