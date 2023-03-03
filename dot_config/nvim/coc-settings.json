@@ -23,5 +23,6 @@
     },
     "diagnostic-languageserver.formatFletypes": {
         "python": ["black"],
-    }
+    },
+    "php-cs-fixer.activateTool": "pint",
 }

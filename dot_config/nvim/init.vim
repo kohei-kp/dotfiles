@@ -407,7 +407,7 @@ let g:fern#default_hidden = 1
 nnoremap <silent> ,f :Fern . -reveal=% -drawer -toggle -width=40<CR>
 
 " coc.nvim
-let g:coc_global_extensions = ['coc-tsserver', 'coc-eslint', 'coc-prettier', 'coc-git', 'coc-fzf-preview', 'coc-lists', 'coc-phpls', 'coc-jedi', 'coc-diagnostic', 'coc-rust-analyzer']
+let g:coc_global_extensions = ['coc-tsserver', 'coc-eslint', 'coc-prettier', 'coc-git', 'coc-fzf-preview', 'coc-lists', 'coc-phpls', 'coc-jedi', 'coc-diagnostic', 'coc-rust-analyzer', 'coc-php-cs-fixer']
 
 nmap <silent> ,d <Plug>(coc-definition)
 nmap <silent> ,y <Plug>(coc-type-definition)
@@ -417,6 +417,9 @@ nmap <silent> ,re <Plug>(coc-rename)
 
 
 command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
+command! -nargs=0 PHPSCSFixer :call CocAction('runCommand', 'php-cs-fixer.fix')
+command! -nargs=0 Pint :call CocAction('runCommand', 'php-cs-fixer.pintFix')
+
 
 "Use K to show documentation in preview window
 nnoremap <silent> K :call <SID>show_documentation()<CR>
