@@ -172,7 +172,7 @@ augroup END
 " hi SpecialKey ctermbg=NONE guibg=NONE
 " hi EndOfBuffer ctermbg=NONE guibg=NONE
 hi Comment gui=NONE
-
+hi SpecialComment gui=NONE
 " set guicursor=
 " net loaded_matchparen = 1
 " }}}
