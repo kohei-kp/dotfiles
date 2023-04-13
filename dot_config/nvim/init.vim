@@ -68,6 +68,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'norcalli/nvim-colorizer.lua'
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
+  Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
+
   " colorscheme
   Plug 'cocopon/iceberg.vim'
   Plug 'w0ng/vim-hybrid'
@@ -539,4 +541,17 @@ require'indent_blankline'.setup {
 }
 
 require'colorizer'.setup()
+
+require("toggleterm").setup()
+local Terminal = require("toggleterm.terminal").Terminal
+local lazygit = Terminal:new({
+  cmd = "lazygit",
+  direction = "float",
+    hidden = true
+})
+
+function _lazygit_toggle()
+  lazygit:toggle()
+end
+vim.api.nvim_set_keymap("n", "lg", "<cmd>lua _lazygit_toggle()<CR>", { noremap = true, silent = true })
 EOF

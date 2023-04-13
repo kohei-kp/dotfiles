@@ -36,3 +36,5 @@ fi
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 . /opt/homebrew/opt/asdf/libexec/asdf.sh
+
+alias lazygit='lazygit -ucd ~/.config/lazygit'
