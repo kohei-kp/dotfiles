@@ -38,4 +38,4 @@ source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 . /opt/homebrew/opt/asdf/libexec/asdf.sh
 
 alias lazygit='lazygit -ucd ~/.config/lazygit'
-alias sail='./vedor/bin/sail'
+alias sail='./vendor/bin/sail'
