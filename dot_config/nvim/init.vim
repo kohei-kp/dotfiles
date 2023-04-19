@@ -554,4 +554,14 @@ function _lazygit_toggle()
   lazygit:toggle()
 end
 vim.api.nvim_set_keymap("n", "lg", "<cmd>lua _lazygit_toggle()<CR>", { noremap = true, silent = true })
+
+local floatTerm = Terminal:new({
+  direction = "float",
+  hidden = true
+})
+function _floatTerm_toggle()
+  floatTerm:toggle()
+end
+vim.api.nvim_set_keymap("n", "tt", "<cmd>lua _floatTerm_toggle()<CR>", { noremap = true, silent = true })
+
 EOF
