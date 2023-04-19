@@ -545,7 +545,7 @@ require'colorizer'.setup()
 require("toggleterm").setup()
 local Terminal = require("toggleterm.terminal").Terminal
 local lazygit = Terminal:new({
-  cmd = "lazygit",
+  cmd = "lazygit -ucd ~/.config/lazygit",
   direction = "float",
     hidden = true
 })

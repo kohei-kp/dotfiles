@@ -39,3 +39,5 @@ source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 alias lazygit='lazygit -ucd ~/.config/lazygit'
 alias sail='./vendor/bin/sail'
+
+export PATH="$HOME/customcommands:$PATH"
