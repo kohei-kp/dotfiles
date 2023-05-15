@@ -12,7 +12,7 @@ end)
 
 return {
     font = wezterm.font_with_fallback({
-        {family="HackGen Console NFJ", weight="Regular", stretch="Normal", style="Normal", italic=false}
+        {family="HackGen Console NF", weight="Regular", stretch="Normal", style="Normal", italic=false}
     }),
     color_scheme = "EverforestDark (Gogh)",
     adjust_window_size_when_changing_font_size = false,
