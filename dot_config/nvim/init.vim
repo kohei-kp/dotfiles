@@ -56,6 +56,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'othree/javascript-libraries-syntax.vim'
   Plug 'lambdalisue/vim-quickrun-neovim-job'
   Plug 'lambdalisue/fern.vim'
+  Plug 'lambdalisue/fern-git-status.vim'
   Plug 'lukas-reineke/indent-blankline.nvim'
 
   if !exists('g:vscode')
@@ -534,10 +535,11 @@ endif
 
 lua << EOF
 -- indent blankline
-require'indent_blankline'.setup {
-  -- for example, context is off by default, use this to turn it on
-  show_current_context = true,
-  show_current_context_start = true,
+require'ibl'.setup {
+  scope = {
+    enabled = true,
+    show_start = true,
+  }
 }
 
 require'colorizer'.setup()
@@ -563,5 +565,4 @@ function _floatTerm_toggle()
   floatTerm:toggle()
 end
 vim.api.nvim_set_keymap("n", "tt", "<cmd>lua _floatTerm_toggle()<CR>", { noremap = true, silent = true })
-
 EOF
