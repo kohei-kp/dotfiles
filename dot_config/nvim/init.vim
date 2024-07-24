@@ -421,8 +421,21 @@ nmap <silent> ,re <Plug>(coc-rename)
 
 command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
 command! -nargs=0 PHPSCSFixer :call CocAction('runCommand', 'php-cs-fixer.fix')
-command! -nargs=0 Pint :call CocAction('runCommand', 'php-cs-fixer.pintFix')
 
+function! s:CheckAndRunPint()
+  " 一時ファイルに保存して構文チェック
+  let l:tempfile = tempname() . '.php'
+  execute 'write! ' . l:tempfile
+  if system('php -l ' . l:tempfile) =~ 'No syntax errors detected'
+    call CocAction('runCommand', 'php-cs-fixer.pintFix')
+  else
+    echo "Syntax error detected. Pint was not run."
+  endif
+  " 一時ファイルの削除
+  call delete(l:tempfile)
+endfunction
+
+command! -nargs=0 Pint call s:CheckAndRunPint()
 
 "Use K to show documentation in preview window
 nnoremap <silent> K :call <SID>show_documentation()<CR>
