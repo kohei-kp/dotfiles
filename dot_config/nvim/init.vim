@@ -126,7 +126,6 @@ set title " タイトル表示
 set display=lastline " できるだけ最後まで表示
 
 set mouse=a " ターミナルでマウスを使用できるように
-set guioptions+=a
 "set ttymouse=xterm2
 
 set list " 不可視文字の視覚化
