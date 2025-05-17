@@ -1,7 +1,7 @@
 [core]
 	autocrlf = input
     aotocrlf = input
-    pager = delta
+    # pager = delta
 
 [color]
   # colorの設定(以下のコマンドは自動で色つける)
@@ -170,11 +170,11 @@
 	name = kohei-kp
 	email = cowhey1991@gmail.com
 
-[delta]
-    navigate = true
+# [delta]
+#     navigate = true
 
-[interractive]
-    diffFilter = delta --color-only
+# [interactive]
+#     diffFilter = delta --color-only
 
 [difftool]
     prompt = true
